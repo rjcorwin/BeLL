@@ -13,7 +13,7 @@
       "app/_attachments/js/jquery.couch.js",
       "app/_attachments/js/renderer.js",
       "app/_attachments/js/mobile.futon.js",
-      "app/_attachments/js/router.js",],
+      "app/_attachments/js/router.js",
       "app/_attachments/img/106.png",
       "app/_attachments/img/261.png",
       "app/_attachments/img/favicon.png",
@@ -21,7 +21,7 @@
       "app/_attachments/img/down_arrow.png",
       "app/_attachments/img/icon72.png",
       "app/_attachments/css/main.css"
-    ]
+    ],
     "dependencies": {
         "attachments": null       
     }
