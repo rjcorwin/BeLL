@@ -1,0 +1,15 @@
+{
+    "_id" : "_design/category_grade_subject",
+    "views" : {
+      "foo" : {
+        "map" : "function(doc){ 
+        	if (doc.subject) {
+                // This will be queried like startkey=[{{grade}}, 'a']
+                // &endkey=[{{grade}}, 'z'] so that only subjects in that
+                // grade can be returned
+        		emit([doc.category, doc.subject], doc.subject)
+        	}
+        }"
+      }
+    }
+}

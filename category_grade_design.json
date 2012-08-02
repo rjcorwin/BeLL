@@ -1,0 +1,8 @@
+{
+    "_id" : "_design/category_grade",
+    "views" : {
+      "foo" : {
+        "map" : "function(doc){ if (doc.grade) {emit(doc.grade, 1)}}"
+      }
+    }
+}

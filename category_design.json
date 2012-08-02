@@ -1,0 +1,12 @@
+{
+    "_id" : "_design/classroom_categories",
+    "views" : {
+      "foo" : {
+        "map" : "function(doc){ 
+        	if (doc.grade) {
+        		emit([doc.grade, doc.subject], doc._rev)
+        	}
+        }"
+      }
+    }
+}

@@ -2,6 +2,8 @@
     "name": "hammock",
     "version": "0.0.1",
     "description": "The simplest possible app",
+    "modules": ["lib"],
+    "load": "lib/app",
     "attachments": [
       "app/_attachments/index.html", 
       "app/_attachments/js/google.fastbutton.js", 
@@ -23,6 +25,8 @@
       "app/_attachments/css/main.css"
     ],
     "dependencies": {
-        "attachments": null       
+        "attachments": null,       
+        "modules": null,
+        "properties": null
     }
 }
