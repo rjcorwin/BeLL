@@ -101,21 +101,40 @@ var MobileFuton = (function () {
     renderer.render('home_tpl', tpldata, rtr);
   });
 
-  router.get('#/login/', function (rtr) {
-    var user = $$("#user").user;
-    if (user.name) {
-      document.location.hash = '#/';
-      return;
-    }
-
-    dialog = $(render($("#logged_out"), {}));
-    dialog.find('.close').bind('click', function() {
-      dialog.remove();
-      document.location.hash = router.previous(0) || '#/';
-    });
-    $("body").append(dialog);
+  router.get('#/test/', function (rtr) {
+    setTitle('Select Grade');
   });
 
+  router.get('#/grade/', function (rtr) {
+    setTitle('Select Grade');
+    var tpldata ={
+      ip: router.params.ip || location.hostname,
+      port: location.port || 80,
+      grades: {{grade: 1}, {grade: 2}} // jquery.couchdb('_design/hammock/_view/grade_subjects?group_level=1')
+    };
+    renderer.render('select_from_grades_tpl', tpldata, rtr);
+  });
+
+  router.get('#/:grade/subject', function (rtr, grade) {
+    setTitle('Select Subject in Grade ' + grade);
+    var tpldata ={
+      ip: router.params.ip || location.hostname,
+      port: location.port || 80,
+      grade: grade,
+      subjects: null // jquery.couchdb('_design/hammock/_view/grade_subjects?group=true&startkey=[1,"a"]&endkey=[1,"z"]') 
+    };
+    renderer.render('select_from_grade_subjects_tpl', tpldata, rtr);
+  });
+
+  router.get('#/:grade/:subject/resources', function (rtr, grade, subject) {
+    setTitle('Select a Resource in Grade ' + grade + ', Subject of ' + subject);
+    var tpldata ={
+      ip: router.params.ip || location.hostname,
+      port: location.port || 80,
+      grade: grade,
+      subject: subject,
+      resources: null // jquery.couchdb('_design/hammock/_v
+  });
 
   router.get('#/couchapps/', function(rtr) {
 

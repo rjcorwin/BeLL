@@ -49,6 +49,18 @@
     </script>
 
 
+    <script type="text/html" id="select_from_grades_tpl">
+      <ul id="db_list">
+        <li class="header">Grades</li>
+        {{#grades}}
+        <li><a href="#/db/{{grade}}/">{{grade}}
+            <span class="arrow right">›</span></a></li>
+        {{/grades}}
+      </ul>
+    </script>
+
+
+
     <script type="text/html" id="replication_doc_tpl">
       <div style="text-align:center; margin: 15px 0px;">
       <h3 id="repl_doc" >
