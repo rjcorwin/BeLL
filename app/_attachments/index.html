@@ -73,9 +73,9 @@
 
     <script type="text/html" id="select_from_grade_subject_resources_tpl">
       <ul id="db_list">
-        <li class="header">Subjects</li>
+        <li class="header">Resources</li>
         {{#resources}}
-        <li><a href="#/grade/{{{grade}}}/subject/{{{subject}}}/resource/{{{id}}}">{{{id}}}
+        <li><a href="#/db/{{db}}/{{{id}}}/">{{{title}}}
             <span class="arrow right">›</span></a></li>
         {{/resources}}
       </ul>

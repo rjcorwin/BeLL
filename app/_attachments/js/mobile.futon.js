@@ -160,17 +160,18 @@ var MobileFuton = (function () {
     $.get('/' + mainDb + '/_design/hammock/_view/grade_subject_resources?key=[' + grade + ',"' + subject + '"]', function(data) {
       //alert(data)
       var response = $.parseJSON(data)
-      var subjects = Array()
+      var resources = Array()
       $.each(response.rows, function(id, data) {
-        subjects[id] = {grade: data.key[0], subject: data.key[1], document_count: data.value}
+        resources[id] = {grade: data.key[0], subject: data.key[1], title: data.value, id: encodeURIComponent(data.id)}
       })
 
       var tpldata = {
         ip: router.params.ip || location.hostname,
         port: location.port || 80,
-        subjects: subjects
+        resources: resources,
+        db: mainDb
       };
-      renderer.render('select_from_grade_subjects_tpl', tpldata, rtr);
+      renderer.render('select_from_grade_subject_resources_tpl', tpldata, rtr);
     });
   });
 
