@@ -101,40 +101,87 @@ var MobileFuton = (function () {
     renderer.render('home_tpl', tpldata, rtr);
   });
 
-  router.get('#/test/', function (rtr) {
-    setTitle('Select Grade');
-  });
+
+/* *************************** Custom ************************ */
+/* *************************** Custom ************************ */
+/* *************************** Custom ************************ */
+/* *************************** Custom ************************ */
+/* *************************** Custom ************************ */
+/* *************************** Custom ************************ */
+/* *************************** Custom ************************ */
+/* *************************** Custom ************************ */
 
   router.get('#/grade/', function (rtr) {
-    setTitle('Select Grade');
-    var tpldata ={
+    
+    setTitle('Select a Grade');
+    var db = $.couch.db(mainDb);
+    // gradesResult = $.couch.db(db).view(['hammock', 'grade_subjects', {'data':{'group_level':1}}) //jquery.couchdb('_design/hammock/_view/grade_subjects?group_level=1')
+    //gradesResult = $.couch.db(db).view(['hammock', 'grade_subjects?group_level=1']) //jquery.couchdb('_design/hammock/_view/grade_subjects?group_level=1')
+    var grades
+    $.get('/' + mainDb + '/_design/hammock/_view/grades?group=true', function(data) {
+      //alert(data)
+      var response = $.parseJSON(data)
+
+      var tpldata ={
       ip: router.params.ip || location.hostname,
       port: location.port || 80,
-      grades: {{grade: 1}, {grade: 2}} // jquery.couchdb('_design/hammock/_view/grade_subjects?group_level=1')
-    };
-    renderer.render('select_from_grades_tpl', tpldata, rtr);
+      grades: response.rows
+      };
+      renderer.render('select_from_grades_tpl', tpldata, rtr);
+    });
+    
+
+
   });
 
-  router.get('#/:grade/subject', function (rtr, grade) {
-    setTitle('Select Subject in Grade ' + grade);
-    var tpldata ={
-      ip: router.params.ip || location.hostname,
-      port: location.port || 80,
-      grade: grade,
-      subjects: null // jquery.couchdb('_design/hammock/_view/grade_subjects?group=true&startkey=[1,"a"]&endkey=[1,"z"]') 
-    };
-    renderer.render('select_from_grade_subjects_tpl', tpldata, rtr);
+  router.get('#/grade/:grade/subject/', function (rtr, grade) {
+    setTitle('Select a subject in Grade ' + grade);
+    $.get('/' + mainDb + '/_design/hammock/_view/grade_subjects?group=true&startkey=[' + grade + ',"a"]&endkey=[' + grade + ',"z"]', function(data) {
+      //alert(data)
+      var response = $.parseJSON(data)
+      var subjects = Array()
+      $.each(response.rows, function(id, data) {
+        subjects[id] = {grade: data.key[0], subject: data.key[1], document_count: data.value}
+      })
+
+      var tpldata = {
+        ip: router.params.ip || location.hostname,
+        port: location.port || 80,
+        subjects: subjects
+      };
+      renderer.render('select_from_grade_subjects_tpl', tpldata, rtr);
+    });
   });
 
-  router.get('#/:grade/:subject/resources', function (rtr, grade, subject) {
+
+
+  router.get('#/grade/:grade/subject/:subject/resource/', function (rtr, grade, subject) {
     setTitle('Select a Resource in Grade ' + grade + ', Subject of ' + subject);
-    var tpldata ={
-      ip: router.params.ip || location.hostname,
-      port: location.port || 80,
-      grade: grade,
-      subject: subject,
-      resources: null // jquery.couchdb('_design/hammock/_v
+    $.get('/' + mainDb + '/_design/hammock/_view/grade_subject_resources?key=[' + grade + ',"' + subject + '"]', function(data) {
+      //alert(data)
+      var response = $.parseJSON(data)
+      var subjects = Array()
+      $.each(response.rows, function(id, data) {
+        subjects[id] = {grade: data.key[0], subject: data.key[1], document_count: data.value}
+      })
+
+      var tpldata = {
+        ip: router.params.ip || location.hostname,
+        port: location.port || 80,
+        subjects: subjects
+      };
+      renderer.render('select_from_grade_subjects_tpl', tpldata, rtr);
+    });
   });
+
+
+
+/* *************************** Custom ************************ */
+/* *************************** Custom ************************ */
+/* *************************** Custom ************************ */
+/* *************************** Custom ************************ */
+/* *************************** Custom ************************ */
+/* *************************** Custom ************************ */
 
   router.get('#/couchapps/', function(rtr) {
 

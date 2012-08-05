@@ -53,12 +53,33 @@
       <ul id="db_list">
         <li class="header">Grades</li>
         {{#grades}}
-        <li><a href="#/db/{{grade}}/">{{grade}}
+        <li><a href="#/grade/{{{key}}}/subject/">{{{key}}}
             <span class="arrow right">›</span></a></li>
         {{/grades}}
       </ul>
     </script>
 
+
+    <script type="text/html" id="select_from_grade_subjects_tpl">
+      <ul id="db_list">
+        <li class="header">Subjects</li>
+        {{#subjects}}
+        <li><a href="#/grade/{{{grade}}}/subject/{{{subject}}}/resource/">{{{subject}}}
+            <span class="arrow right">{{{document_count}}}›</span></a></li>
+        {{/subjects}}
+      </ul>
+    </script>
+
+
+    <script type="text/html" id="select_from_grade_subject_resources_tpl">
+      <ul id="db_list">
+        <li class="header">Subjects</li>
+        {{#resources}}
+        <li><a href="#/grade/{{{grade}}}/subject/{{{subject}}}/resource/{{{id}}}">{{{id}}}
+            <span class="arrow right">›</span></a></li>
+        {{/resources}}
+      </ul>
+    </script>
 
 
     <script type="text/html" id="replication_doc_tpl">
