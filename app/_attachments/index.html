@@ -7,7 +7,7 @@
           content="width=device-width,minimum-scale=1,maximum-scale=1" />
     <meta name="apple-mobile-web-app-capable" content="yes">
 
-    <title>Mobile Futon</title>
+    <title>Welcome to your library</title>
 
     <link rel="apple-touch-icon-precomposed" href="./img/icon72.png"/>
     <link rel="stylesheet" href="css/main.css">
@@ -18,7 +18,7 @@
 
     <div id="header">
       <a id="home" class="plain_btn" href="#/">&lt;</a>
-      <h1 id="title">Mobile Futon</h1>
+      <h1 id="title">Welcome to your library</h1>
       <div id="user">&nbsp;</div>
       <div id="user_panel"></div>
     </div>
@@ -54,7 +54,7 @@
         <li class="header">Grades</li>
         {{#grades}}
         <li><a href="#/grade/{{{key}}}/subject/">{{{key}}}
-            <span class="arrow right">›</span></a></li>
+            <span class="arrow right">{{{value}}}›</span></a></li>
         {{/grades}}
       </ul>
     </script>
@@ -188,11 +188,11 @@
     <script type="text/html" id="document_tpl">
 
       <ul>
-        <li class="header">Files</li>
+        <li class="header">{{title}}</li>
         {{#hasAttachments}}
         {{#attachments}}
         <li>
-            <a href="/{{db}}/{{doc}}/{{{attachment}}}">{{{attachment}}}
+            <a class="attachment_download" href="/{{db}}/{{doc}}/{{{attachment}}}"><div class='attachment_download_text'>{{{attachment}}}</div>
             <span class="arrow right">›</span></a>
         </li>
         {{/attachments}}

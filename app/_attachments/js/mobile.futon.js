@@ -114,15 +114,11 @@ var MobileFuton = (function () {
 
   router.get('#/grade/', function (rtr) {
     
-    setTitle('Select a Grade');
+    setTitle('What grade are you in?');
     var db = $.couch.db(mainDb);
-    // gradesResult = $.couch.db(db).view(['hammock', 'grade_subjects', {'data':{'group_level':1}}) //jquery.couchdb('_design/hammock/_view/grade_subjects?group_level=1')
-    //gradesResult = $.couch.db(db).view(['hammock', 'grade_subjects?group_level=1']) //jquery.couchdb('_design/hammock/_view/grade_subjects?group_level=1')
     var grades
     $.get('/' + mainDb + '/_design/hammock/_view/grades?group=true', function(data) {
-      //alert(data)
       var response = $.parseJSON(data)
-
       var tpldata ={
       ip: router.params.ip || location.hostname,
       port: location.port || 80,
@@ -130,13 +126,11 @@ var MobileFuton = (function () {
       };
       renderer.render('select_from_grades_tpl', tpldata, rtr);
     });
-    
-
 
   });
 
   router.get('#/grade/:grade/subject/', function (rtr, grade) {
-    setTitle('Select a subject in Grade ' + grade);
+    setTitle('Which subject would you like to see?');
     $.get('/' + mainDb + '/_design/hammock/_view/grade_subjects?group=true&startkey=[' + grade + ',"a"]&endkey=[' + grade + ',"z"]', function(data) {
       //alert(data)
       var response = $.parseJSON(data)
@@ -157,7 +151,7 @@ var MobileFuton = (function () {
 
 
   router.get('#/grade/:grade/subject/:subject/resource/', function (rtr, grade, subject) {
-    setTitle('Select a Resource in Grade ' + grade + ', Subject of ' + subject);
+    setTitle('Which lesson does your teacher want you to open?');
     $.get('/' + mainDb + '/_design/hammock/_view/grade_subject_resources?key=[' + grade + ',"' + subject + '"]', function(data) {
       //alert(data)
       var response = $.parseJSON(data)
@@ -457,7 +451,7 @@ var MobileFuton = (function () {
     }
 
     $.couch.db(db).openDoc(docId, opts).then(function(json) {
-      setTitle(json.title)
+      setTitle("Touch the name of the file to download it")
       var keys = []
         , revs = $.map(json._revs_info || [], function(obj) {
           return {rev:obj.rev, available:obj.status === "available"};
@@ -484,6 +478,7 @@ var MobileFuton = (function () {
       renderer.render('document_tpl', { db: db
                                       , attachments: attachments
                                       , hasAttachments: hasAttachments
+                                      , title: json.title
                                       , canedit: true
                                       , doc:doc
                                       , keys: keys
@@ -913,6 +908,11 @@ var MobileFuton = (function () {
       }
     });
 
+    $(".downroad").bind('click', function() {
+      alert('yar')
+      $(this).html("Your download should finish shortly.")
+    })
+
   })();
 
   function  isAdminParty() {
@@ -948,6 +948,13 @@ var MobileFuton = (function () {
       var html = '<li class="selectwrapper"><input placeholder="key" type="text" name="key[]" /></li><li><textarea placeholder="value" name="value[]"></textarea></li>';
       $("#addkeylist").append(html);
     });
+
+    $(".attachment_download_text", tpl).bind('mousedown', function() {
+      var text = $(this).text()
+      if (text.indexOf("Your download") == -1) {
+        $(this).html('Your download has begun.  Check for "' + $(this).text() + '" in your downloads.' ).fadeIn('slow')
+      }        
+    })
   };
 
   updateSession(function() {
@@ -959,3 +966,5 @@ var MobileFuton = (function () {
   });
 
 })();
+
+
