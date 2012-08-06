@@ -466,7 +466,19 @@ var MobileFuton = (function () {
                   , value: JSON.stringify(json[obj], null, ' ')
                   , url: obj});
       });
+
+      var attachments = []
+      if(json._attachments != null) {
+        $.each(json._attachments, function(key, obj) {
+          attachments.push({'attachment':key})
+        })
+      }
+      if(attachments.length < 1) {
+        attachments.push({'attachment':"No attachments."})
+      }
+
       renderer.render('document_tpl', { db: db
+                                      , attachments: attachments
                                       , canedit: true
                                       , doc:doc
                                       , keys: keys

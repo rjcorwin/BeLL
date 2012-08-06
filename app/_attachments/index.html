@@ -201,6 +201,20 @@
         {{/keys}}
       </ul>
 
+      <ul>
+        <li class="header">Attachments</li>
+        {{#attachments}}
+        {{#canedit}}
+        <li>
+            <a href="/{{db}}/{{doc}}/{{{attachment}}}">{{{attachment}}}</a>
+            <span class="arrow right">›</span></a></li>
+        {{/canedit}}
+        {{^canedit}}
+            <a href="/{{db}}/{{doc}}/{{{attachment}}}">{{{attachment}}}</a>
+        {{/canedit}}
+        {{/attachments}}
+      </ul>
+
       {{#canedit}}
       <form action="#addkey" id="addkeyform">
         <input type="hidden" name="db" value="{{db}}" />
