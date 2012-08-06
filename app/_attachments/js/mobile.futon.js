@@ -98,7 +98,8 @@ var MobileFuton = (function () {
       version: version.version,
       adminparty: isAdminParty()
     };
-    renderer.render('home_tpl', tpldata, rtr);
+    router.forward('#/grade/', {}, rtr);
+   // renderer.render('home_tpl', tpldata, rtr);
   });
 
 
@@ -447,7 +448,7 @@ var MobileFuton = (function () {
   router.get('#/db/:db/:doc/rev/:rev/', function (rtr, db, doc, rev) {
 
     var docId = decodeURIComponent(doc);
-    setTitle(doc);
+    //setTitle(doc);
     db = decodeURIComponent(db);
 
     var opts = {revs_info:true};
@@ -456,6 +457,7 @@ var MobileFuton = (function () {
     }
 
     $.couch.db(db).openDoc(docId, opts).then(function(json) {
+      setTitle(json.title)
       var keys = []
         , revs = $.map(json._revs_info || [], function(obj) {
           return {rev:obj.rev, available:obj.status === "available"};
@@ -473,12 +475,15 @@ var MobileFuton = (function () {
           attachments.push({'attachment':key})
         })
       }
+      var hasAttachments = true
       if(attachments.length < 1) {
         attachments.push({'attachment':"No attachments."})
+        hasAttachments = false
       }
 
       renderer.render('document_tpl', { db: db
                                       , attachments: attachments
+                                      , hasAttachments: hasAttachments
                                       , canedit: true
                                       , doc:doc
                                       , keys: keys

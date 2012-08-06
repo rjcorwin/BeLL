@@ -188,45 +188,19 @@
     <script type="text/html" id="document_tpl">
 
       <ul>
-        <li class="header">JSON</li>
-        {{#keys}}
-        {{#canedit}}
-        <li><a href="#/db/{{db}}/{{doc}}/rev/{{rev}}/{{url}}/">
-            {{key}}: <span class="jsonval">{{value}}</span>
-            <span class="arrow right">›</span></a></li>
-        {{/canedit}}
-        {{^canedit}}
-        <li class="selectwrapper">{{key}}: <span class="jsonval">{{value}}</span></li>
-        {{/canedit}}
-        {{/keys}}
-      </ul>
-
-      <ul>
-        <li class="header">Attachments</li>
+        <li class="header">Files</li>
+        {{#hasAttachments}}
         {{#attachments}}
-        {{#canedit}}
         <li>
-            <a href="/{{db}}/{{doc}}/{{{attachment}}}">{{{attachment}}}</a>
-            <span class="arrow right">›</span></a></li>
-        {{/canedit}}
-        {{^canedit}}
-            <a href="/{{db}}/{{doc}}/{{{attachment}}}">{{{attachment}}}</a>
-        {{/canedit}}
+            <a href="/{{db}}/{{doc}}/{{{attachment}}}">{{{attachment}}}
+            <span class="arrow right">›</span></a>
+        </li>
         {{/attachments}}
+        {{/hasAttachments}}
+        {{^hasAttachments}}
+          <li style="height:60px; padding-top: 20px; padding-left:20px">There are no files for this document.</li>
+        {{/hasAttachments}}
       </ul>
-
-      {{#canedit}}
-      <form action="#addkey" id="addkeyform">
-        <input type="hidden" name="db" value="{{db}}" />
-        <input type="hidden" name="doc" value="{{doc}}">
-        <input type="hidden" name="key" value="{{key}}">
-
-        <ul id="addkeylist"></ul>
-        <div style="padding:10px;">
-          <a class="button" id="addkey">Add Key</a>
-        </div>
-      </form>
-      {{/canedit}}
 
       {{#preview}}
       <ul>
@@ -247,11 +221,7 @@
         {{/revisions}}
       </ul>
       {{/hasrevisions}}
-      <div style="padding:10px;">
-        <a href="#/db/{{db}}/{{doc}}{{optkey}}/_delete/" class="button warning">
-          Delete
-        </a>
-      </div>
+
     </script>
 
 
