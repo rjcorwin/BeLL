@@ -952,7 +952,7 @@ var MobileFuton = (function () {
     $(".attachment_download_text", tpl).bind('mousedown', function() {
       var text = $(this).text()
       if (text.indexOf("Your download") == -1) {
-        $(this).html('Your download has begun.  Check for "' + $(this).text() + '" in your downloads.' ).fadeIn('slow')
+        $(this).html('Your download has started.  Check for "' + $(this).text() + '" in your downloads.' ).fadeIn('slow')
       }        
     })
   };
