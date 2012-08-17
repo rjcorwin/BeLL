@@ -16,7 +16,33 @@
       port: location.port || 80,
       grades: response.rows
       };
-      renderer.render('select_from_grades_tpl', tpldata, rtr);
+
+      /*
+       * Render the grade list
+       */
+
+      var grade_list_html = 
+      	'<div data-role="content" style="padding: 15px">' +
+	        '<ul data-role="listview" data-divider-theme="b" data-inset="true">'
+      ;
+
+      $.each(tpldata.grades, function (index, grade) {
+        grade_list_html += 
+              '<li data-theme="a">' +
+                  '<a href="#page-which-subject?grade=' + grade + '" data-transition="slide">' +
+                      grade +
+                  '</a>' + 
+              '</li>'
+        ;
+      })
+
+      grade_list_html +=
+          '</ul>' +
+        '</div>'
+      ;
+
+      $("#page-which-grade .content").html(grade_list_html)
+
     });
 
   });
