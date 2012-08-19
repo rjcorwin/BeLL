@@ -4,126 +4,141 @@
    * Router
    */
 
-  $( "#page-which-grade" ).live( "pageinit", function(event){
+/*
+  $.mobile.routerlite.pagechange("#page-which-subject", function(page){
+    console.log(page)
+  });    
+*/
+
+/*
+  $( document ).bind( "pagebeforeload", function( event, data ){
+    console.log(data.url)
+    data.resolve()
+
+  })
+*/
+
+  var router=new $.mobile.Router([
     
-    setTitle('What grade are you in?');
-    var db = getDB();
-    var grades
-    $.getJSON('/' + db + '/_design/library/_view/grades?group=true', function(data) {
-      var response = data
-      var tpldata ={
-      ip: location.hostname,
-      port: location.port || 80,
-      grades: response.rows
-      };
+    {"#page-which-grade": function() {
 
-      /*
-       * Render the grade list
-       */
-
-      var list_html = 
-      	'<div data-role="content" style="padding: 15px">' +
-	        '<ul data-role="listview" data-divider-theme="b" data-inset="true">'
-      ;
-
-      $.each(tpldata.grades, function (index, grade) {
-        list_html += 
-              '<li data-theme="a">' +
-                  '<a href="#page-which-subject&grade=' + grade.key + '" data-transition="slide">Grade ' +
-                      grade.key +
-                  '</a>' + 
-              '</li>'
-        ;
-      })
-
-      list_html +=
-          '</ul>' +
-        '</div>'
-      ;
-
-      $("#page-which-grade .content").html(list_html)
-
-      // Warning: This causes an infinite loop
-      //$('#page-which-grade').page('destroy').page()
-
-      // JQM render 
-      $("#page-which-grade").trigger("create");
-
-    });
-
-  });
-
-
-  $( "#page-which-subject" ).live( "pageinit", function(event){
-    setTitle('Which subject would you like to see?');
-    var db = getDB();
-    // The URL is not available here!!! Ugh.
-    console.log(document.URL)
-    var grade = $.url().fparam('grade')
-    $.getJSON('/' + db + '/_design/library/_view/grade_subjects?group=true&startkey=[' + grade + ',"a"]&endkey=[' + grade + ',"z"]', function(data) {
-      var response = data
-      var subjects = Array()
-      $.each(response.rows, function(id, data) {
-        subjects[id] = {grade: data.key[0], subject: data.key[1], document_count: data.value}
-      })
-
-      var tpldata = {
+      setTitle('What grade are you in?');
+      var db = getDB();
+      var grades
+      $.getJSON('/' + db + '/_design/library/_view/grades?group=true', function(data) {
+        var response = data
+        var tpldata ={
         ip: location.hostname,
         port: location.port || 80,
-        subjects: subjects
-      };
+        grades: response.rows
+        };
 
-      /*
-       * Render the grade list
-       */
+        /*
+         * Render the grade list
+         */
 
-      var list_html = 
-        '<div data-role="content" style="padding: 15px">' +
-          '<ul data-role="listview" data-divider-theme="b" data-inset="true">'
-      ;
-
-      $.each(tpldata.subjects, function (index, subject) {
-        list_html += 
-              '<li data-theme="a">' +
-                  '<a href="#page-which-subject&grade=' + grade + '&subject=' + subject.subject + '" data-transition="slide">Grade ' +
-                      subject.subject +
-                  '</a>' + 
-              '</li>'
+        var list_html = 
+        	'<div data-role="content" style="padding: 15px">' +
+  	        '<ul data-role="listview" data-divider-theme="b" data-inset="true">'
         ;
+
+        $.each(tpldata.grades, function (index, grade) {
+          list_html += 
+                '<li data-theme="a">' +
+                    '<a href="#page-which-subject&grade=' + grade.key + '" data-transition="slide">Grade ' +
+                        grade.key +
+                    '</a>' + 
+                '</li>'
+          ;
+        })
+
+        list_html +=
+            '</ul>' +
+          '</div>'
+        ;
+
+        $("#page-which-grade .content").html(list_html)
+
+        // Warning: This causes an infinite loop
+        //$('#page-which-grade').page('destroy').page()
+
+        // JQM render 
+        $("#page-which-grade").trigger("create");
+
       })
+    }},
+  
 
-      list_html +=
-          '</ul>' +
-        '</div>'
-      ;
+    { "#page-which-subject" : function() {
+      setTitle('Which subject would you like to see?');
+      var db = getDB();
+      console.log(document.URL)
+      var grade = $.url().fparam('grade')
+      $.getJSON('/' + db + '/_design/library/_view/grade_subjects?group=true&startkey=[' + grade + ',"a"]&endkey=[' + grade + ',"z"]', function(data) {
+        var response = data
+        var subjects = Array()
+        $.each(response.rows, function(id, data) {
+          subjects[id] = {grade: data.key[0], subject: data.key[1], document_count: data.value}
+        })
 
-      $("#page-which-subject .content").html(list_html)
+        var tpldata = {
+          ip: location.hostname,
+          port: location.port || 80,
+          subjects: subjects
+        };
 
-      // JQM render 
-      $("#page-which-subject").trigger("create");
-    });
-  });
+        /*
+         * Render the grade list
+         */
+
+        var list_html = 
+          '<div data-role="content" style="padding: 15px">' +
+            '<ul data-role="listview" data-divider-theme="b" data-inset="true">'
+        ;
+
+        $.each(tpldata.subjects, function (index, subject) {
+          list_html += 
+                '<li data-theme="a">' +
+                    '<a href="#page-which-subject&grade=' + grade + '&subject=' + subject.subject + '" data-transition="slide">Grade ' +
+                        subject.subject +
+                    '</a>' + 
+                '</li>'
+          ;
+        })
+
+        list_html +=
+            '</ul>' +
+          '</div>'
+        ;
+
+        $("#page-which-subject .content").html(list_html)
+
+        // jQM render 
+        $("#page-which-subject").trigger("create");
+      });
+    }},
 
 
-  $( "#page-which-resource" ).live( "pageinit", function(event){
-    setTitle('Which lesson does your teacher want you to open?');
-    var db = getDB();
-    $.getJSON('/' + db + '/_design/library/_view/grade_subject_resources?key=[' + grade + ',"' + subject + '"]', function(data) {
-      var response = data
-      var resources = Array()
-      $.each(response.rows, function(id, data) {
-        resources[id] = {grade: data.key[0], subject: data.key[1], title: data.value, id: encodeURIComponent(data.id)}
-      })
+    { "#page-which-resource" : function() {
+      setTitle('Which lesson does your teacher want you to open?');
+      var db = getDB();
+      $.getJSON('/' + db + '/_design/library/_view/grade_subject_resources?key=[' + grade + ',"' + subject + '"]', function(data) {
+        var response = data
+        var resources = Array()
+        $.each(response.rows, function(id, data) {
+          resources[id] = {grade: data.key[0], subject: data.key[1], title: data.value, id: encodeURIComponent(data.id)}
+        })
 
-      var tpldata = {
-        ip: router.params.ip || location.hostname,
-        port: location.port || 80,
-        resources: resources,
-        db: db
-      };
-      renderer.render('select_from_grade_subject_resources_tpl', tpldata, rtr);
-    });
-  });
+        var tpldata = {
+          ip: router.params.ip || location.hostname,
+          port: location.port || 80,
+          resources: resources,
+          db: db
+        };
+        renderer.render('select_from_grade_subject_resources_tpl', tpldata, rtr);
+      });
+    }}
+  ]) /* end of Router */
 
 
   /*
