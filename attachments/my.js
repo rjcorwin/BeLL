@@ -154,7 +154,7 @@
                                 '</div>' +
                             '</div>' +
                         '</div>' +
-                        '<a data-role="button" data-transition="fade" data-theme="a" href="#page-comments-and-ratings' + '&id=\'' + encodeURIComponent(resource_data._id) + '\'">' +
+                        '<a data-role="button" data-transition="fade" data-theme="a" href="#page-feedback' + '&id=\'' + encodeURIComponent(resource_data._id) + '\'">' +
                             'comments and ratings' +
                         '</a>' +
                     '</div>'
@@ -176,12 +176,12 @@
 
 
   /*
-   * Page: page-comments-and-ratings
+   * Page: page-feedback
    */
 
-  $("#page-comments-and-ratings").live("pagebeforeshow", function(e, d) {
+  $("#page-feedback").live("pagebeforeshow", function(e, d) {
     // Add id to the submit your own button
-    $("a.submit-your-own-comment").attr("href", "#page-comment-and-rate&id=" + encodeURIComponent($.url().fparam("id")) + "")
+    $("a.submit-your-own-comment").attr("href", "#page-submit-feedback&id=" + encodeURIComponent($.url().fparam("id")) + "")
 
     // Add stats to Ratings overview
 
@@ -193,10 +193,10 @@
 
 
   /*
-   * Page: page-comment-and-rate
+   * Page: page-submit-feedback
    */
 
-  $("#page-comment-and-rate").live("pagebeforeshow", function(e, d) {
+  $("#page-submit-feedback").live("pagebeforeshow", function(e, d) {
     
     // Set the resource id
     $("input#textinput4").attr("value", removeQuotes(decodeURIComponent($.url().fparam('id'))))
@@ -222,8 +222,8 @@
       $.couch.db(getDB()).saveDoc(feedback, {
         success: function(data) {
           console.log(data);
-          //window.location = "#page-comments-and-ratings&id=" + $.url().fparam('id')
-          $.mobile.changePage("#page-comments-and-ratings&id=" + encodeURIComponent($.url().fparam("id")))
+          //window.location = "#page-feedback&id=" + $.url().fparam('id')
+          $.mobile.changePage("#page-feedback&id=" + encodeURIComponent($.url().fparam("id")))
         },
         error: function(status) {
           console.log(status);
