@@ -129,7 +129,7 @@
 
           var item = '<div data-role="collapsible" data-collapsed="true">' +
                         '<h3>' + 
-                            resource_data.title + ' - Rating' +
+                            resource_data.title + //' - Rating' +
                         '</h3>' +
                         '<div class="ui-grid-a">'+
                             '<div class="ui-block-a">' +
