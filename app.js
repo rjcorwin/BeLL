@@ -90,6 +90,45 @@ ddoc.views = {
     }
   },
 
+  feedback_all: {
+    map: function(doc) {
+      if (doc.type == "feedback") {
+        emit(doc._id, true)
+      }
+    }
+  },
+
+  feedback_by_resource: {
+    map: function(doc) {
+      if (doc.type == "feedback") {
+        emit(doc.resource, doc._id)
+      }
+    }
+  },  
+
+  /*
+   * _design/library/_view/feedback_rating_totals?group=true&startkey=["resource-0001","1"]&endkey=["resource-0001","5"]
+   */
+  feedback_rating_totals: {
+    map: function(doc) {
+      if (doc.type == "feedback") {
+        emit([doc.resource, doc.rating], doc.rating)
+      }
+    },
+    reduce: function(keys, values, rereduce) {
+      if(!rereduce) {
+        log("keys")
+        log(keys)
+        log("values")
+        log(values)
+        return values.length
+      }
+      else {
+        log("REREDUCE ENGAGE")
+      }
+    }
+  }
+
 }
 
 ddoc.validate_doc_update = function (newDoc, oldDoc, userCtx) {   

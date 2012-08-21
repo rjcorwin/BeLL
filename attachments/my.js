@@ -64,7 +64,7 @@
         subjects[id] = {grade: data.key[0], name: data.key[1], document_count: data.value}
       })
 
-      // Render the grade list
+      // Render the subject list
       var html = 
         '<div data-role="content" style="padding: 15px">' +
           '<ul data-role="listview" data-divider-theme="b" data-inset="true">'
@@ -73,7 +73,7 @@
       $.each(subjects, function (index, subject) {
         html += 
               '<li data-theme="a">' +
-                  '<a href="#page-which-resource&grade=' + grade + '&subject=' + subject.name + '" data-transition="slide">Grade ' +
+                  '<a href="#page-which-resource&grade=' + grade + '&subject=' + subject.name + '" data-transition="slide">' +
                       subject.name +
                   '</a>' + 
               '</li>'
@@ -154,7 +154,7 @@
                                 '</div>' +
                             '</div>' +
                         '</div>' +
-                        '<a data-role="button" data-transition="fade" data-theme="a" href="#page-feedback' + '&id=\'' + encodeURIComponent(resource_data._id) + '\'">' +
+                        '<a data-role="button" data-transition="fade" data-theme="a" href="#page-feedback' + '&id=' + encodeURIComponent(resource_data._id) + '">' +
                             'comments and ratings' +
                         '</a>' +
                     '</div>'
@@ -180,13 +180,81 @@
    */
 
   $("#page-feedback").live("pagebeforeshow", function(e, d) {
+    var resourceId = $.url().fparam("id")
+    var resourceId_safe = encodeURIComponent(resourceId)
+    console.log(resourceId)
+    var db = getDB()
     // Add id to the submit your own button
-    $("a.submit-your-own-comment").attr("href", "#page-submit-feedback&id=" + encodeURIComponent($.url().fparam("id")) + "")
+    $("a.submit-your-own-comment").attr("href", "#page-submit-feedback&id=" + resourceId_safe + "")
 
-    // Add stats to Ratings overview
+    // Add Average
+    /*
+    // Add rating totals
+    $.getJSON("/" + db + '/_design/library/_view/feedback_rating_totals?group=true&startkey=["' + resourceId + '",' + 1 + ']&endkey=["' + resourceId + '",' + '5]', function(data) {
+        var ratingCount = []
+        var i = 1
+        while(i <= 5) {
+          ratingCount[i] = data.rows[resourceId, i] 
+          i++
+        }
+        var html = "<div class='rating-count'>" + "Rating 5: " + ratingCount[5] + "total" + "</div>" +
+        "<div class='rating-count'>" + "Rating 4: " + ratingCount[4] + "total" + "</div>" +
+        "<div class='rating-count'>" + "Rating 3: " + ratingCount[3] + "total" + "</div>" +
+        "<div class='rating-count'>" + "Rating 2: " + ratingCount[2] + "total" + "</div>" +
+        "<div class='rating-count'>" + "Rating 1: " + ratingCount[1] + "total" + "</div>" ;
+        $(".resource-rating-totals").html(html)
+    })
+    /*
+    $.couch.db(db).view('library/feedback_rating_totals', {
+      group : true,
+      startkey : [resourceId, 1],
+      endkey : [resourceId, 5],
+      success : function(data) {
+        var ratingCount = []
+        var i = 1
+        while(i <= 5) {
+          ratingCount[i] = data.rows[resourceId, i] 
+          i++
+        }
+        var html = "<div class='rating-count'>" + "Rating 5: " + ratingCount[5] + "total" + "</div>" +
+        "<div class='rating-count'>" + "Rating 4: " + ratingCount[4] + "total" + "</div>" +
+        "<div class='rating-count'>" + "Rating 3: " + ratingCount[3] + "total" + "</div>" +
+        "<div class='rating-count'>" + "Rating 2: " + ratingCount[2] + "total" + "</div>" +
+        "<div class='rating-count'>" + "Rating 1: " + ratingCount[1] + "total" + "</div>" ;
+        $(".resource-rating-totals").html(html)
+      } 
+
+    })
+    */
+
 
     // Add the list of comments
-
+    
+    $.couch.db(db).view('library/feedback_by_resource', {
+      key: resourceId,
+      success: function(resource_feedback_data) {
+        console.log(resource_feedback_data)
+        $.each(resource_feedback_data.rows, function(key, row) {
+          $.couch.db(db).openDoc(row.value, {
+            success: function(doc) {
+              var d = new Date(doc.timestamp)
+              var html = '<div data-role="collapsible" data-collapsed="false">' +
+                    '<h3>' +
+                      doc.rating + " - " + d.getMonth() + "/" + d.getDate() + "/" + d.getFullYear() + " - " + doc.user + " - " + doc.group +
+                    '</h3>' +
+                    '<div>' +
+                        doc.comment
+                    '</div>' +
+                '</div>'
+                ;
+              $(".list-feedback-of-resource").append(html)
+              // Render the list
+              $("#page-feedback").trigger("create");
+            }
+          })
+        })
+      }
+    })
   })
 
 
@@ -199,7 +267,7 @@
   $("#page-submit-feedback").live("pagebeforeshow", function(e, d) {
     
     // Set the resource id
-    $("input#textinput4").attr("value", removeQuotes(decodeURIComponent($.url().fparam('id'))))
+    $("input#textinput4").attr("value", decodeURIComponent($.url().fparam('id')))
     $("input#textinput4").textinput('disable')
 
     $("#form-comment-and-rate").submit(function(){
@@ -213,13 +281,15 @@
         comment: $("textarea:eq(0)").val(),
         anonymous: $("select:eq(0)").val(),
         timestamp: currentTime.getTime(),
-        _id: "#type-feedback #time-" + currentTime.getTime() + " #uuid-" + $.couch.newUUID()
+        _id: "type-feedback--time-" + currentTime.getTime() + "--uuid-" + $.couch.newUUID()
       } 
       console.log(feedback)
       if(feedback.anonymous == "off" && feedback.user == "") {
-        alert("Your comment has not been submitted because you forgot to add your name.")
+        alert("Woops! It looks like you forgot to add your name.  Enter your name and submit again.")
         return false
       }
+
+      // @todo: somehow this is being submitted one more time every time it is submitted.
       $.couch.db(getDB()).saveDoc(feedback, {
         success: function(data) {
           console.log(data);
@@ -241,6 +311,7 @@
   /*
    * Helper functions
    */
+
 
   function setTitle(text) {
     $('#title, title').text(text);
@@ -534,3 +605,17 @@ function closestEnabledButton( element ) {
 
 	
 })(jQuery);
+
+function deleteAllFeedback() {
+  $.couch.db("library").view("library/feedback_all", {
+    success: function(result) {
+      $.each(result.rows, function(key, value) {
+        $.couch.db("library").openDoc(value.key, {
+          success: function(doc) {
+            $.couch.db("library").removeDoc(doc)
+          }
+        })
+      })
+    }
+  })
+}
