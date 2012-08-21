@@ -212,6 +212,7 @@
         rating: $("form input[type=radio]:checked").val(),
         comment: $("textarea:eq(0)").val(),
         anonymous: $("select:eq(0)").val(),
+        timestamp: currentTime.getTime(),
         _id: "#type-feedback #time-" + currentTime.getTime() + " #uuid-" + $.couch.newUUID()
       } 
       console.log(feedback)
