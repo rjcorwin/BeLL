@@ -1,7 +1,10 @@
 (function($) {
 
 
-  
+  /*
+   * Page: page-which-grade
+   */
+
   $("#page-which-grade").live("pageshow", function(e, d) {
 
     setTitle('What grade are you in?');
@@ -38,6 +41,12 @@
     })
   })
 
+
+
+
+  /* 
+   * Page: page-which-subject
+   */
 
   $("#page-which-subject").live("pagebeforeshow", function(e, d) {
 
@@ -84,6 +93,13 @@
     });
   })
 
+
+
+
+  /*
+   * Page: page-which-resource
+   */
+
   $("#page-which-resource").live("pagebeforeshow", function(e, d) {
 
     // clear the content region
@@ -93,7 +109,6 @@
     var db = getDB();
     var grade = $.url().fparam('grade')
     var subject = $.url().fparam('subject')
-
 
     $.getJSON('/' + db + '/_design/library/_view/grade_subject_resources?key=[' + grade + ',"' + subject + '"]', function(data) {
       var response = data
@@ -139,7 +154,7 @@
                                 '</div>' +
                             '</div>' +
                         '</div>' +
-                        '<a data-role="button" data-transition="fade" data-theme="a" href="#page-comments-and-ratings' + '?id=\'' + encodeURIComponent(resource_data._id) + '\'">' +
+                        '<a data-role="button" data-transition="fade" data-theme="a" href="#page-comments-and-ratings' + '&id=\'' + encodeURIComponent(resource_data._id) + '\'">' +
                             'comments and ratings' +
                         '</a>' +
                     '</div>'
@@ -147,7 +162,6 @@
 
           // Print the results to the screen
           $("#page-which-resource .content .resource-list").append(item)
-          console.log(item)
 
           // Render the results using jQM render 
           $("#page-which-resource").trigger("create");
@@ -157,6 +171,64 @@
 
     });
   })
+
+  
+
+
+  /*
+   * Page: page-comments-and-ratings
+   */
+
+  $("#page-comments-and-ratings").live("pagebeforeshow", function(e, d) {
+    // Add id to the submit your own button
+    $("a.submit-your-own-comment").attr("href", "#page-comment-and-rate&id=" + encodeURIComponent($.url().fparam("id")) + "")
+
+    // Add stats to Ratings overview
+
+    // Add the list of comments
+
+  })
+
+
+
+
+  /*
+   * Page: page-comment-and-rate
+   */
+
+  $("#page-comment-and-rate").live("pagebeforeshow", function(e, d) {
+    
+    // Set the resource id
+    $("input#textinput4").attr("value", removeQuotes(decodeURIComponent($.url().fparam('id'))))
+    $("input#textinput4").textinput('disable')
+
+    $("#form-comment-and-rate").submit(function(){
+      var feedback = {
+        type: "feedback",
+        resource: $("input:eq(0)").val(),
+        user: $("input:eq(1)").val(),
+        group: $("input:eq(2)").val(),
+        rating: $("form input[type=radio]:checked").val(),
+        comment: $("textarea:eq(0)").val(),
+        anonymous: $("select:eq(0)").val()
+      } 
+      console.log(feedback)
+      if(feedback.anonymous == "off" && feedback.user == "") {
+        alert("Your comment has not been submitted because you forgot to add your name.")
+        return false
+      }
+      $.ajax({
+        url: "test.html",
+        context: document.body
+      }).done(function() { 
+        $(this).addClass("done");
+      });
+      return false
+
+    })
+  })
+
+
 
 
   /*
@@ -169,6 +241,10 @@
 
   function getDB() {
   	return document.URL.split("/")[3]
+  }
+
+  function removeQuotes(text) {
+    return text.substring(1, text.length - 1)
   }
 
 

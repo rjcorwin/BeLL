@@ -20,6 +20,12 @@
         <script src="libraries/jQuery-URL-Parser/jquery.url.js">
         </script>
 
+        <script src="/_utils/script/json2.js"></script>
+        <script src="/_utils/script/sha1.js"></script>
+        <!-- script src="/_utils/script/jquery.js?1.4.2"></script -->
+        <script src="/_utils/script/jquery.couch.js?0.11.0"></script>
+        <script src="/_utils/script/jquery.dialog.js?0.11.0"></script>
+
         <script src="my.js">
         </script>
     </head>
@@ -192,7 +198,7 @@
                 </h3>
             </div>
             <div data-role="content" style="padding: 15px">
-                <a data-role="button" data-transition="fade" href="#page-comment-and-rate" data-icon="arrow-r"
+                <a class='submit-your-own-comment' data-role="button" data-transition="fade" href="#page-comment-and-rate" data-icon="arrow-r"
                 data-iconpos="right">
                     Submit your own comment and rating
                 </a>
@@ -279,7 +285,7 @@
                 </h3>
             </div>
             <div data-role="content" style="padding: 15px">
-                <form action="">
+                <form id="form-comment-and-rate" method="get" action="app.html#page-comments-and-ratings">
                     <div data-role="fieldcontain">
                         <fieldset data-role="controlgroup">
                             <label for="textinput4">
@@ -306,10 +312,21 @@
                     </div>
                     <div data-role="fieldcontain">
                         <fieldset data-role="controlgroup">
-                            <label for="textinput7">
-                                Rating
-                            </label>
-                            <input name="" id="textinput7" placeholder="" value="" type="text">
+                            <legend>Choose a pet:</legend>
+                                <input type="radio" name="radio-choice" id="radio-choice-5" value="5" checked="checked" />
+                                <label for="radio-choice-5">5 - Highest</label>
+
+                                <input type="radio" name="radio-choice" id="radio-choice-4" value="4"  />
+                                <label for="radio-choice-4">4</label>
+
+                                <input type="radio" name="radio-choice" id="radio-choice-3" value="3"  />
+                                <label for="radio-choice-3">3</label>
+
+                                <input type="radio" name="radio-choice" id="radio-choice-2" value="2"  />
+                                <label for="radio-choice-2">2</label>
+
+                                <input type="radio" name="radio-choice" id="radio-choice-1" value="1"  />
+                                <label for="radio-choice-1">1 - Lowest</label>
                         </fieldset>
                     </div>
                     <div data-role="fieldcontain">
