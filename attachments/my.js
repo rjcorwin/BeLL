@@ -203,6 +203,7 @@
     $("input#textinput4").textinput('disable')
 
     $("#form-comment-and-rate").submit(function(){
+      var currentTime = new Date()
       var feedback = {
         type: "feedback",
         resource: $("input:eq(0)").val(),
@@ -210,18 +211,23 @@
         group: $("input:eq(2)").val(),
         rating: $("form input[type=radio]:checked").val(),
         comment: $("textarea:eq(0)").val(),
-        anonymous: $("select:eq(0)").val()
+        anonymous: $("select:eq(0)").val(),
+        _id: "#type-feedback #time-" + currentTime.getTime() + " #uuid-" + $.couch.newUUID()
       } 
       console.log(feedback)
       if(feedback.anonymous == "off" && feedback.user == "") {
         alert("Your comment has not been submitted because you forgot to add your name.")
         return false
       }
-      $.ajax({
-        url: "test.html",
-        context: document.body
-      }).done(function() { 
-        $(this).addClass("done");
+      $.couch.db(getDB()).saveDoc(feedback, {
+        success: function(data) {
+          console.log(data);
+          //window.location = "#page-comments-and-ratings&id=" + $.url().fparam('id')
+          $.mobile.changePage("#page-comments-and-ratings&id=" + encodeURIComponent($.url().fparam("id")))
+        },
+        error: function(status) {
+          console.log(status);
+        }
       });
       return false
 
