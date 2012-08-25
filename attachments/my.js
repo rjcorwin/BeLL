@@ -241,6 +241,9 @@
 
   $("#page-submit-feedback").live("pagebeforeshow", function(e, d) {
 
+    // It's ok for form values to persist but not the actual comment value
+    $("textarea:eq(0)").val(" ")
+
     // Set the resource id
     $("input#textinput4").attr("value", decodeURIComponent($.url().fparam('id')))
     $("input#textinput4").textinput('disable')
