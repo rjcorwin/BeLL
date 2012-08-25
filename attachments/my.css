@@ -1,5 +1,15 @@
 /* Generic icon styles */
 
+
+.ui-header {
+  background: url(images/star.png) !important;
+  padding: 6px;
+}
+
+.ui-body-b, .ui-overlay-b {
+  background: url(images/bg-bd-lite.png) !important;
+}
+
 /* 26x26 pixels */
 
 .ui-btn-icon-left .ui-btn-inner .ui-icon.ui-iconsize-26, 

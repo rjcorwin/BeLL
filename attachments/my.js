@@ -19,7 +19,7 @@
 
       $.each(data.rows, function (index, grade) {
         html += 
-              '<li data-theme="a">' +
+              '<li data-theme="b">' +
                   '<a href="#page-which-subject&grade=' + grade.key + '" data-transition="slide">Grade ' +
                       grade.key +
                   '</a>' + 
@@ -72,7 +72,7 @@
 
       $.each(subjects, function (index, subject) {
         html += 
-              '<li data-theme="a">' +
+              '<li data-theme="b">' +
                   '<a href="#page-which-resource&grade=' + grade + '&subject=' + subject.name + '" data-transition="slide">' +
                       subject.name +
                   '</a>' + 
@@ -119,7 +119,7 @@
         resources[id] = {grade: data.key[0], subject: data.key[1], title: data.value, id: data.id, id_safe: encodeURIComponent(data.id)}
       })
 
-      $("#page-which-resource .content").html('<div class="resource-list" data-role="collapsible-set" data-theme="a" data-content-theme="e"></div>')
+      $("#page-which-resource .content").html('<div class="resource-list" data-role="collapsible-set" data-theme="b" data-content-theme="e"></div>')
 
       $.each(resources, function (index, resource) {
         $.getJSON('/' + db + '/' + resource.id_safe, function(resource_data) {
@@ -154,7 +154,7 @@
                                 '</div>' +
                             '</div>' +
                         '</div>' +
-                        '<a data-role="button" data-transition="fade" data-theme="a" href="#page-feedback' + '&id=' + encodeURIComponent(resource_data._id) + '">' +
+                        '<a data-role="button" data-transition="fade" data-theme="b" href="#page-feedback' + '&id=' + encodeURIComponent(resource_data._id) + '">' +
                             'comments and ratings' +
                         '</a>' +
                     '</div>'
@@ -186,6 +186,10 @@
     var db = getDB()
     // Add id to the submit your own button
     $("a.submit-your-own-comment").attr("href", "#page-submit-feedback&id=" + resourceId_safe + "")
+
+    // clear the content region
+    $("#page-feedback .content").html("Loading...")
+
 
     // Add Average
     /*
@@ -265,6 +269,9 @@
    */
 
   $("#page-submit-feedback").live("pagebeforeshow", function(e, d) {
+
+    // clear the content region
+    $("#page-submit-feedback .content").html("Loading...")
     
     // Set the resource id
     $("input#textinput4").attr("value", decodeURIComponent($.url().fparam('id')))
