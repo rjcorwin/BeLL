@@ -177,6 +177,10 @@
    */
 
   $("#page-feedback").live("pagebeforeshow", function(e, d) {
+
+    // clear the previously generated list 
+    $("#page-feedback .list-feedback-of-resource").html("Loading...")
+
     var resourceId = $.url().fparam("id")
     var resourceId_safe = encodeURIComponent(resourceId)
     console.log(resourceId)
@@ -190,34 +194,40 @@
     // Add id to the "submit your own" button
     $("a.submit-your-own-comment").attr("href", "#page-submit-feedback&id=" + resourceId_safe + "")
 
-    // clear the content region
-    $("#page-feedback .ui-content").html("Loading...")
-
     // Add the list of comments
     
     $.couch.db(db).view('library/feedback_by_resource', {
       key: resourceId,
       success: function(resource_feedback_data) {
-        console.log(resource_feedback_data)
-        $.each(resource_feedback_data.rows, function(key, row) {
-          $.couch.db(db).openDoc(row.value, {
-            success: function(doc) {
-              var d = new Date(doc.timestamp)
-              var html = '<div data-role="collapsible" data-collapsed="false">' +
-                    '<h3>' +
-                      doc.rating + " - " + d.getMonth() + "/" + d.getDate() + "/" + d.getFullYear() + " - " + doc.user + " - " + doc.group +
-                    '</h3>' +
-                    '<div>' +
-                        doc.comment
-                    '</div>' +
-                '</div>'
+        if(resource_feedback_data.rows) {
+          $.each(resource_feedback_data.rows, function(key, row) {
+            $.couch.db(db).openDoc(row.value, {
+              success: function(doc) {
+                var d = new Date(doc.timestamp)
+                var html = '<div data-role="collapsible" data-collapsed="false">' +
+                      '<h3>' +
+                        doc.rating + " - " + d.getMonth() + "/" + d.getDate() + "/" + d.getFullYear() + " - " + doc.user + " - " + doc.group +
+                      '</h3>' +
+                      '<div>' +
+                          doc.comment
+                      '</div>' +
+                  '</div>'
                 ;
-              $(".list-feedback-of-resource").append(html)
-              // Render the list
-              $("#page-feedback").trigger("create");
-            }
+                $(".list-feedback-of-resource").append(html)
+                $("#page-feedback").trigger("create");
+         
+              }
+            })
           })
-        })
+        }
+        else {
+          var html = "No feedback for this resource."
+          $(".list-feedback-of-resource").append(html)
+          $("#page-feedback").trigger("create");
+        }
+
+
+        // Render the list
       }
     })
   })
@@ -231,9 +241,6 @@
 
   $("#page-submit-feedback").live("pagebeforeshow", function(e, d) {
 
-    // clear the content region
-    $("#page-submit-feedback .ui-content").html("Loading...")
-    
     // Set the resource id
     $("input#textinput4").attr("value", decodeURIComponent($.url().fparam('id')))
     $("input#textinput4").textinput('disable')
