@@ -199,6 +199,8 @@
     $.couch.db(db).view('library/feedback_by_resource', {
       key: resourceId,
       success: function(resource_feedback_data) {
+        // Clear the Loading text
+        $("#page-feedback .list-feedback-of-resource").html("")
         if(resource_feedback_data.rows) {
           $.each(resource_feedback_data.rows, function(key, row) {
             $.couch.db(db).openDoc(row.value, {
@@ -242,7 +244,7 @@
   $("#page-submit-feedback").live("pagebeforeshow", function(e, d) {
 
     // It's ok for form values to persist but not the actual comment value
-    $("textarea:eq(0)").val(" ")
+    $("textarea:eq(0)").val("")
 
     // Set the resource id
     $("input#textinput4").attr("value", decodeURIComponent($.url().fparam('id')))
