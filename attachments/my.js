@@ -32,7 +32,7 @@
       ;
 
       // Print the results to the screen
-      $("#page-which-grade .content").html(html)
+      $("#page-which-grade .ui-content").html(html)
 
       // Render the results using jQM render 
       $("#page-which-grade").trigger("create");
@@ -50,7 +50,7 @@
   $("#page-which-subject").live("pagebeforeshow", function(e, d) {
 
     // clear the content region
-    $("#page-which-subject .content").html("Loading...")
+    $("#page-which-subject .ui-content").html("Loading...")
 
     var db = getDB();
     var grade = $.url().fparam('grade')
@@ -84,7 +84,7 @@
       ;
 
       // Print the results to the screen
-      $("#page-which-subject .content").html(html)
+      $("#page-which-subject .ui-content").html(html)
 
       // Render the results using jQM render 
       $("#page-which-subject").trigger("create");
@@ -101,7 +101,7 @@
   $("#page-which-resource").live("pagebeforeshow", function(e, d) {
 
     // clear the content region
-    $("#page-which-resource .content").html("Loading...")
+    $("#page-which-resource .ui-content").html("Loading...")
 
     var db = getDB();
     var grade = $.url().fparam('grade')
@@ -116,7 +116,7 @@
         resources[id] = {grade: data.key[0], subject: data.key[1], title: data.value, id: data.id, id_safe: encodeURIComponent(data.id)}
       })
 
-      $("#page-which-resource .content").html('<div class="resource-list" data-role="collapsible-set" data-theme="b" data-content-theme="e"></div>')
+      $("#page-which-resource .ui-content").html('<div class="resource-list" data-role="collapsible-set" data-theme="b" data-content-theme="e"></div>')
 
       $.each(resources, function (index, resource) {
         $.getJSON('/' + db + '/' + resource.id_safe, function(resource_data) {
@@ -158,7 +158,7 @@
           ;
 
           // Print the results to the screen
-          $("#page-which-resource .content .resource-list").append(item)
+          $("#page-which-resource .ui-content .resource-list").append(item)
 
           // Render the results using jQM render 
           $("#page-which-resource").trigger("create");
@@ -191,7 +191,7 @@
     $("a.submit-your-own-comment").attr("href", "#page-submit-feedback&id=" + resourceId_safe + "")
 
     // clear the content region
-    $("#page-feedback .content").html("Loading...")
+    $("#page-feedback .ui-content").html("Loading...")
 
 
     // Add Average
@@ -274,7 +274,7 @@
   $("#page-submit-feedback").live("pagebeforeshow", function(e, d) {
 
     // clear the content region
-    $("#page-submit-feedback .content").html("Loading...")
+    $("#page-submit-feedback .ui-content").html("Loading...")
     
     // Set the resource id
     $("input#textinput4").attr("value", decodeURIComponent($.url().fparam('id')))
