@@ -193,48 +193,6 @@
     // clear the content region
     $("#page-feedback .ui-content").html("Loading...")
 
-
-    // Add Average
-    /*
-    // Add rating totals
-    $.getJSON("/" + db + '/_design/library/_view/feedback_rating_totals?group=true&startkey=["' + resourceId + '",' + 1 + ']&endkey=["' + resourceId + '",' + '5]', function(data) {
-        var ratingCount = []
-        var i = 1
-        while(i <= 5) {
-          ratingCount[i] = data.rows[resourceId, i] 
-          i++
-        }
-        var html = "<div class='rating-count'>" + "Rating 5: " + ratingCount[5] + "total" + "</div>" +
-        "<div class='rating-count'>" + "Rating 4: " + ratingCount[4] + "total" + "</div>" +
-        "<div class='rating-count'>" + "Rating 3: " + ratingCount[3] + "total" + "</div>" +
-        "<div class='rating-count'>" + "Rating 2: " + ratingCount[2] + "total" + "</div>" +
-        "<div class='rating-count'>" + "Rating 1: " + ratingCount[1] + "total" + "</div>" ;
-        $(".resource-rating-totals").html(html)
-    })
-    /*
-    $.couch.db(db).view('library/feedback_rating_totals', {
-      group : true,
-      startkey : [resourceId, 1],
-      endkey : [resourceId, 5],
-      success : function(data) {
-        var ratingCount = []
-        var i = 1
-        while(i <= 5) {
-          ratingCount[i] = data.rows[resourceId, i] 
-          i++
-        }
-        var html = "<div class='rating-count'>" + "Rating 5: " + ratingCount[5] + "total" + "</div>" +
-        "<div class='rating-count'>" + "Rating 4: " + ratingCount[4] + "total" + "</div>" +
-        "<div class='rating-count'>" + "Rating 3: " + ratingCount[3] + "total" + "</div>" +
-        "<div class='rating-count'>" + "Rating 2: " + ratingCount[2] + "total" + "</div>" +
-        "<div class='rating-count'>" + "Rating 1: " + ratingCount[1] + "total" + "</div>" ;
-        $(".resource-rating-totals").html(html)
-      } 
-
-    })
-    */
-
-
     // Add the list of comments
     
     $.couch.db(db).view('library/feedback_by_resource', {
