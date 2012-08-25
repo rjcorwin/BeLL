@@ -181,7 +181,13 @@
     var resourceId_safe = encodeURIComponent(resourceId)
     console.log(resourceId)
     var db = getDB()
-    // Add id to the submit your own button
+
+    // This page is a rare case where users pull a u-turn after submitting feedback.  
+    // This causes the browser's back functionality to go back to the form when we want to 
+    // go back to the resources page with the correct parameters.
+    // @todo
+
+    // Add id to the "submit your own" button
     $("a.submit-your-own-comment").attr("href", "#page-submit-feedback&id=" + resourceId_safe + "")
 
     // clear the content region
