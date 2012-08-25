@@ -1,5 +1,23 @@
-/* Generic icon styles */
 
+
+/* OLE Styles */
+
+
+.large-text-mode * {
+  font-size: 1.1em;
+}
+
+.center-wrapper{
+text-align: center;
+}
+
+.center-wrapper * {
+margin: 0 auto;
+}
+
+.center-button{
+margin: 0 auto !important;
+}
 
 .ui-header {
   background: url(images/star.png) !important;
@@ -9,6 +27,9 @@
 .ui-body-b, .ui-overlay-b {
   background: url(images/bg-bd-lite.png) !important;
 }
+
+/* Generic icon styles */
+
 
 /* 26x26 pixels */
 

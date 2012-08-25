@@ -7,7 +7,6 @@
 
   $("#page-which-grade").live("pageshow", function(e, d) {
 
-    setTitle('What grade are you in?');
     var db = getDB();
     var grades
     $.getJSON('/' + db + '/_design/library/_view/grades?group=true', function(data) {
@@ -53,7 +52,6 @@
     // clear the content region
     $("#page-which-subject .content").html("Loading...")
 
-    setTitle('Which subject would you like to see?');
     var db = getDB();
     var grade = $.url().fparam('grade')
 
@@ -105,7 +103,6 @@
     // clear the content region
     $("#page-which-resource .content").html("Loading...")
 
-    setTitle('Which lesson does your teacher want you to open?');
     var db = getDB();
     var grade = $.url().fparam('grade')
     var subject = $.url().fparam('subject')
@@ -155,7 +152,7 @@
                             '</div>' +
                         '</div>' +
                         '<a data-role="button" data-transition="fade" data-theme="b" href="#page-feedback' + '&id=' + encodeURIComponent(resource_data._id) + '">' +
-                            'comments and ratings' +
+                            'feedback' +
                         '</a>' +
                     '</div>'
           ;
@@ -319,10 +316,6 @@
    * Helper functions
    */
 
-
-  function setTitle(text) {
-    $('#title, title').text(text);
-  }
 
   function getDB() {
   	return document.URL.split("/")[3]

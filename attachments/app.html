@@ -37,29 +37,14 @@
         <!-- select a grade... -->
         <div data-role="page" data-theme="b" id="page-which-grade">
             <div data-theme="b" data-role="header">
-                <div data-role='button'>
-                    <
+                <div class="center-wrapper">
+                    <div class="center-button" data-role='button'>
+                        select a grade
+                    </div>
                 </div>
-                <div data-role='button'>
-                    select a grade...
-                </div>
             </div>
-            <div class="content" data-role="content" style="padding: 15px">
-                
-            </div>
-        </div>
-
-
-
-        <!-- ticketHistory -->
-        <div data-role="page" data-theme="b" id="ticketHistory">
-            <div data-theme="b" data-role="header">
-                <h3>
-                    select a fern...
-                </h3>
-            </div>
-            <div class="content" data-role="content" style="padding: 15px">
-                
+            <div class="large-text-mode" data-role="content" style="padding: 15px">
+               Loading... 
             </div>
         </div>
 
@@ -68,12 +53,17 @@
         <!-- select a subject... -->
         <div data-role="page" data-theme="b" id="page-which-subject">
             <div data-theme="b" data-role="header">
-                <h3>
-                    select a subject...
-                </h3>
+                <a data-rel="back" class="back-button" data-role='button'>
+                    <
+                </a>
+                <div class="center-wrapper">
+                    <div class="center-button" data-role='button'>
+                        select a subject
+                    </div>
+                </div>
             </div>
-            <div class="content" data-role="content" style="padding: 15px">
-
+            <div class="large-text-mode" data-role="content" style="padding: 15px">
+                Loading...
             </div>
         </div>
 
@@ -82,11 +72,16 @@
         <!-- select a topic... -->
         <div data-role="page" data-theme="b" id="page-which-topic">
             <div data-theme="b" data-role="header">
-                <h3>
-                    select a topic...
-                </h3>
+                <a data-rel="back" class="back-button" data-role='button'>
+                    <
+                </a>
+                <div class="center-wrapper">
+                    <div class="center-button" data-role='button'>
+                        select a topic
+                    </div>
+                </div>
             </div>
-            <div data-role="content" style="padding: 15px">
+            <div class="large-text-mode" data-role="content" style="padding: 15px">
                 <ul data-role="listview" data-divider-theme="b" data-inset="true">
                     <li data-theme="b">
                         <a href="#page1" data-transition="slide">
@@ -112,11 +107,16 @@
         <!-- select a skill... -->
         <div data-role="page" data-theme="b" id="page-which-skill">
             <div data-theme="b" data-role="header">
-                <h3>
-                    select a skill...
-                </h3>
+                <a data-rel="back" class="back-button" data-role='button'>
+                    <
+                </a>
+                <div class="center-wrapper">
+                    <div class="center-button" data-role='button'>
+                        select a skill...
+                    </div>
+                </div>
             </div>
-            <div data-role="content" style="padding: 15px">
+            <div class="large-text-mode" data-role="content" style="padding: 15px">
                 <ul data-role="listview" data-divider-theme="b" data-inset="true">
                     <li data-theme="b">
                         <a href="#page1" data-transition="slide">
@@ -142,11 +142,16 @@
         <!-- select a resource... -->
         <div data-role="page" data-theme="b" id="page-which-resource">
             <div data-theme="b" data-role="header">
-                <h3>
-                    select a resource...
-                </h3>
-            </div>
-            <div class='content' data-role="content" style="padding: 15px">
+                <a data-rel="back" class="back-button" data-role='button'>
+                    <
+                </a>
+                <div class="center-wrapper">
+                    <div class="center-button" data-role='button'>
+                        select a resource
+                    </div>
+                </div>
+            </div> 
+            <div class="large-text-mode" data-role="content" style="padding: 15px">
                 <div data-role="collapsible-set" data-theme="b" data-content-theme="e">
                     <div data-role="collapsible" data-collapsed="false">
                         <h3>
@@ -174,7 +179,7 @@
                             </div>
                         </div>
                         <a data-role="button" data-transition="fade" data-theme="b" href="#page13">
-                            comments and ratings
+                            feedback
                         </a>
                     </div>
                     <div data-role="collapsible" data-collapsed="true">
@@ -193,14 +198,19 @@
 
 
 
-        <!-- comments and ratings -->
+        <!-- feedback -->
         <div data-role="page" data-theme="b" id="page-feedback">
             <div data-theme="b" data-role="header">
-                <h3>
-                    Feedback
-                </h3>
-            </div>
-            <div data-role="content" style="padding: 15px">
+                <a data-rel="back" class="back-button" data-role='button'>
+                    <
+                </a>
+                <div class="center-wrapper">
+                    <div class="center-button" data-role='button'>
+                        Feedback
+                    </div>
+                </div>
+            </div> 
+            <div class="large-text-mode" data-role="content" style="padding: 15px">
                 <a class='submit-your-own-comment' data-role="button" data-transition="fade" href="#page-submit-feedback" data-icon="arrow-r"
                 data-iconpos="right">
                     Submit your own feedback
@@ -251,14 +261,23 @@
 
 
 
-        <!-- please submit a comment and rating -->
+        <!-- please submit feedback for this resource -->
         <div data-role="page" data-theme="e" id="page-submit-feedback">
             <div data-theme="b" data-role="header">
+                <a data-rel="back" class="back-button" data-role='button'>
+                    <
+                </a>
+                <div class="center-wrapper">
+                    <div class="center-button" data-role='button'>
+                        please submit feedback for this resource
+                    </div>
+                </div>
+            </div>             
+            <div data-theme="b" data-role="header">
                 <h3>
-                    please submit feedback for this resource...
                 </h3>
             </div>
-            <div data-role="content" style="padding: 15px">
+            <div class="large-text-mode" data-role="content" style="padding: 15px">
                 <form id="form-comment-and-rate" method="get" action="app.html#page-feedback">
                     <div data-role="fieldcontain">
                         <fieldset data-role="controlgroup">
@@ -331,12 +350,6 @@
             </div>
         </div>
 
-
-        <div data-theme="b" data-role="footer">
-                <h3>
-                    select a skill...
-                </h3>
-            </div>
         <script>
               //App custom javascript
         </script>
