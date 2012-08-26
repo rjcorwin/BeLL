@@ -253,6 +253,9 @@
 
   $("#page-submit-feedback").live("pagebeforeshow", function(e, d) {
 
+    // Back button
+    $("#page-submit-feedback .back-button").attr('href', '#page-feedback' + '&id=' + $.url().fparam('id') )
+
     // It's ok for form values to persist but not the actual comment value
     $("textarea:eq(0)").val("")
 
