@@ -14,6 +14,8 @@
         </style>
         <script src="libraries/jquery/1.7.1/jquery.min.js">
         </script>
+        <script src="init.js">
+        </script>
         <!--script src="libraries/jquery.mobile/1.1.1/jquery.mobile-1.1.1.min.js" -->
         <script src="libraries/jquery.mobile/1.1.1-patched/jquery.mobile-1.1.1.js">
         </script>
@@ -44,7 +46,7 @@
                 </div>
             </div>
             <div class="large-text-mode" data-role="content" style="padding: 15px">
-               Loading... 
+               <div class="loading">Loading...<img src="images/ajax-loader.png"></div> 
             </div>
         </div>
 
@@ -53,8 +55,8 @@
         <!-- select a subject... -->
         <div data-role="page" data-theme="b" id="page-which-subject">
             <div data-theme="b" data-role="header">
-                <a data-rel="back" class="back-button" data-role='button'>
-                    <
+                <a href="#page-which-grade" class="back-button" data-role='button'>
+                    <--
                 </a>
                 <div class="center-wrapper">
                     <div class="center-button" data-role='button'>
@@ -63,87 +65,16 @@
                 </div>
             </div>
             <div class="large-text-mode" data-role="content" style="padding: 15px">
-                Loading...
+                <div class="loading">Loading...<img src="images/ajax-loader.png"></div> 
             </div>
         </div>
-
-
-
-        <!-- select a topic... -->
-        <div data-role="page" data-theme="b" id="page-which-topic">
-            <div data-theme="b" data-role="header">
-                <a data-rel="back" class="back-button" data-role='button'>
-                    <
-                </a>
-                <div class="center-wrapper">
-                    <div class="center-button" data-role='button'>
-                        select a topic
-                    </div>
-                </div>
-            </div>
-            <div class="large-text-mode" data-role="content" style="padding: 15px">
-                <ul data-role="listview" data-divider-theme="b" data-inset="true">
-                    <li data-theme="b">
-                        <a href="#page1" data-transition="slide">
-                            Button
-                        </a>
-                    </li>
-                    <li data-theme="b">
-                        <a href="#page1" data-transition="slide">
-                            Button
-                        </a>
-                    </li>
-                    <li data-theme="b">
-                        <a href="#page1" data-transition="slide">
-                            Button
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-
-
-        <!-- select a skill... -->
-        <div data-role="page" data-theme="b" id="page-which-skill">
-            <div data-theme="b" data-role="header">
-                <a data-rel="back" class="back-button" data-role='button'>
-                    <
-                </a>
-                <div class="center-wrapper">
-                    <div class="center-button" data-role='button'>
-                        select a skill...
-                    </div>
-                </div>
-            </div>
-            <div class="large-text-mode" data-role="content" style="padding: 15px">
-                <ul data-role="listview" data-divider-theme="b" data-inset="true">
-                    <li data-theme="b">
-                        <a href="#page1" data-transition="slide">
-                            Button
-                        </a>
-                    </li>
-                    <li data-theme="b">
-                        <a href="#page1" data-transition="slide">
-                            Button
-                        </a>
-                    </li>
-                    <li data-theme="b">
-                        <a href="#page1" data-transition="slide">
-                            Button
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
 
 
         <!-- select a resource... -->
         <div data-role="page" data-theme="b" id="page-which-resource">
             <div data-theme="b" data-role="header">
-                <a data-rel="back" class="back-button" data-role='button'>
-                    <
+                <a href="#page-which-grade" class="back-button" data-role='button'>
+                    <--
                 </a>
                 <div class="center-wrapper">
                     <div class="center-button" data-role='button'>
@@ -201,8 +132,8 @@
         <!-- feedback -->
         <div data-role="page" data-theme="b" id="page-feedback">
             <div data-theme="b" data-role="header">
-                <a data-rel="back" class="back-button" data-role='button'>
-                    <
+                <a href="#page-which-grade" class="back-button" data-role='button'>
+                    <--
                 </a>
                 <div class="center-wrapper">
                     <div class="center-button" data-role='button'>
@@ -211,11 +142,11 @@
                 </div>
             </div> 
             <div class="large-text-mode" data-role="content" style="padding: 15px">
-                <a class='submit-your-own-comment' data-role="button" data-transition="fade" href="#page-submit-feedback" data-icon="arrow-r"
+                <a class='submit-your-own-comment' data-role="button" href="#page-submit-feedback" data-icon="arrow-r"
                 data-iconpos="right">
                     Submit your own feedback
                 </a>
-                
+
                 <div class="list-feedback-of-resource" data-role="collapsible-set" data-theme="" data-content-theme="e">
                     
                 </div>
@@ -227,8 +158,8 @@
         <!-- please submit feedback for this resource -->
         <div data-role="page" data-theme="e" id="page-submit-feedback">
             <div data-theme="b" data-role="header">
-                <a data-rel="back" class="back-button" data-role='button'>
-                    <
+                <a onclick="window.history.back()" class="back-button" data-role='button'>
+                    <--
                 </a>
                 <div class="center-wrapper">
                     <div class="center-button" data-role='button'>
@@ -264,7 +195,7 @@
                     </div>
                     <div data-role="fieldcontain">
                         <fieldset data-role="controlgroup">
-                            <legend>Choose a pet:</legend>
+                            <legend>Rating</legend>
                                 <input type="radio" name="radio-choice" id="radio-choice-5" value=5 checked="checked" />
                                 <label for="radio-choice-5">5 - Highest</label>
 

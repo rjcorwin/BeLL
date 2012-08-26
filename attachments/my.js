@@ -1,11 +1,14 @@
 (function($) {
 
-
   /*
    * Page: page-which-grade
    */
 
   $("#page-which-grade").live("pageshow", function(e, d) {
+
+  $(".ui-btn, .ui-link-inherit, .ui-btn-text").click(function() {
+    $.mobile.showPageLoadingMsg();
+  })
 
     var db = getDB();
     var grades
@@ -19,7 +22,7 @@
       $.each(data.rows, function (index, grade) {
         html += 
               '<li data-theme="b">' +
-                  '<a href="#page-which-subject&grade=' + grade.key + '" data-transition="slide">Grade ' +
+                  '<a href="#page-which-subject&grade=' + grade.key + '" >Grade ' +
                       grade.key +
                   '</a>' + 
               '</li>'
@@ -50,7 +53,7 @@
   $("#page-which-subject").live("pagebeforeshow", function(e, d) {
 
     // clear the content region
-    $("#page-which-subject .ui-content").html("Loading...")
+    $("#page-which-subject .ui-content").html("<div class='loading'>Loading...<img src='images/ajax-loader.png'></div> ")
 
     var db = getDB();
     var grade = $.url().fparam('grade')
@@ -71,7 +74,7 @@
       $.each(subjects, function (index, subject) {
         html += 
               '<li data-theme="b">' +
-                  '<a href="#page-which-resource&grade=' + grade + '&subject=' + subject.name + '" data-transition="slide">' +
+                  '<a href="#page-which-resource&grade=' + grade + '&subject=' + subject.name + '" >' +
                       subject.name +
                   '</a>' + 
               '</li>'
@@ -101,11 +104,13 @@
   $("#page-which-resource").live("pagebeforeshow", function(e, d) {
 
     // clear the content region
-    $("#page-which-resource .ui-content").html("Loading...")
+    $("#page-which-resource .ui-content").html("<div class='loading'>Loading...<img src='images/ajax-loader.png'></div> ")
 
     var db = getDB();
     var grade = $.url().fparam('grade')
     var subject = $.url().fparam('subject')
+
+    $("#page-which-resource a.back-button").attr("href", "#page-which-subject&grade=" + grade + "&subject=" + subject)
 
     $.getJSON('/' + db + '/_design/library/_view/grade_subject_resources?key=[' + grade + ',"' + subject + '"]', function(data) {
       var response = data
@@ -139,7 +144,7 @@
                             '<div class="ui-block-b">'
           ;
           $.each(resource_data._attachments, function (key, value) {
-            item +=             '<a rel="external" data-role="button" data-transition="fade" data-theme="b" href="/' + db + '/' + encodeURIComponent(resource_data._id) + '/' + encodeURIComponent(key) + '" ' +
+            item +=             '<a rel="external" data-role="button" data-theme="b" href="/' + db + '/' + encodeURIComponent(resource_data._id) + '/' + encodeURIComponent(key) + '" ' +
                                 'data-icon="arrow-d" data-iconpos="right">' +
                                     'download ' + key +
                                 '</a>' 
@@ -151,7 +156,7 @@
                                 '</div>' +
                             '</div>' +
                         '</div>' +
-                        '<a data-role="button" data-transition="fade" data-theme="b" href="#page-feedback' + '&id=' + encodeURIComponent(resource_data._id) + '">' +
+                        '<a data-role="button" data-theme="b" href="#page-feedback' + '&id=' + encodeURIComponent(resource_data._id) + '">' +
                             'feedback' +
                         '</a>' +
                     '</div>'
@@ -179,12 +184,17 @@
   $("#page-feedback").live("pagebeforeshow", function(e, d) {
 
     // clear the previously generated list 
-    $("#page-feedback .list-feedback-of-resource").html("Loading...")
+    $("#page-feedback .list-feedback-of-resource").html("<div class='loading'>Loading...<img src='images/ajax-loader.png'></div> ")
 
     var resourceId = $.url().fparam("id")
     var resourceId_safe = encodeURIComponent(resourceId)
     console.log(resourceId)
     var db = getDB()
+    
+    // Back button
+    $.getJSON('/' + db + '/' + resourceId_safe, function(resource_data) {
+      $("#page-feedback a.back-button").attr("href", "#page-which-resource&grade=" + resource_data.grade + "&subject=" + resource_data.subject)
+    })
 
     // This page is a rare case where users pull a u-turn after submitting feedback.  
     // This causes the browser's back functionality to go back to the form when we want to 

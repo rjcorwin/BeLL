@@ -20,12 +20,20 @@ margin: 0 auto !important;
 }
 
 .ui-header {
-  background: url(images/star.png) !important;
+  background: url(images/star-tall.png) !important;
   padding: 6px;
+}
+.ui-header .ui-btn-inner .ui-btn-text {
+  font-size:36px;
 }
 
 .ui-body-b, .ui-overlay-b {
   background: url(images/bg-bd-lite.png) !important;
+}
+
+.loading {
+  color: #FFF;
+  font-size:60px;
 }
 
 /* Generic icon styles */
