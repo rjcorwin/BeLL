@@ -90,6 +90,15 @@ ddoc.views = {
     }
   },
 
+
+  resource_all: {
+    map: function(doc) {
+      if (doc.type == "resource") {
+        emit(doc._id, true)
+      }
+    }
+  },
+
   feedback_all: {
     map: function(doc) {
       if (doc.type == "feedback") {
