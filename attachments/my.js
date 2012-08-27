@@ -245,25 +245,12 @@
   })
 
 
-
-
-  /*
-   * Page: page-submit-feedback
-   */
-
-  $("#page-submit-feedback").live("pagebeforeshow", function(e, d) {
-
-    // Back button
-    $("#page-submit-feedback .back-button").attr('href', '#page-feedback' + '&id=' + $.url().fparam('id') )
-
-    // It's ok for form values to persist but not the actual comment value
-    $("textarea:eq(0)").val("")
-
-    // Set the resource id
-    $("input#textinput4").attr("value", decodeURIComponent($.url().fparam('id')))
-    $("input#textinput4").textinput('disable')
-
-    $("#form-comment-and-rate").submit(function(){
+//pagebeforecreate
+$("#page-submit-feedback").live("pagebeforecreate", function(e, d) {
+  alert("ar")
+  // @todo This is being binded for each time this page loads.  That means feedback will be submitted (1 x the 
+    // the amount of time this page has been viewed.)
+    $("#form-comment-and-rate").bind("submit", function(){
       var currentTime = new Date()
       var feedback = {
         type: "feedback",
@@ -296,6 +283,24 @@
       return false
 
     })
+  })
+  /*
+   * Page: page-submit-feedback
+   */
+
+  $("#page-submit-feedback").live("pagebeforeshow", function(e, d) {
+
+    // Back button
+    $("#page-submit-feedback .back-button").attr('href', '#page-feedback' + '&id=' + $.url().fparam('id') )
+
+    // It's ok for form values to persist but not the actual comment value
+    $("textarea:eq(0)").val("")
+
+    // Set the resource id
+    $("input#textinput4").attr("value", decodeURIComponent($.url().fparam('id')))
+    $("input#textinput4").textinput('disable')
+
+    
   })
 
 
