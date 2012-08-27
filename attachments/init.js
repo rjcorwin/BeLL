@@ -1,10 +1,10 @@
 $(document).bind("mobileinit", function(){
   $.extend(  $.mobile , {
-    loadingMessage : "Yarrr",
+    loadingMessage : "Loading...",
 	loadingMessageTextVisible : true,
 	ajaxEnabled : false,
 	defaultPageTransition : "none",
-	hashListeningEnabled : false,
+	hashListeningEnabled : true,
 	buttonMarkup : {hoverDelay : 500},
   });
 });
