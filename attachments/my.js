@@ -257,9 +257,6 @@
 
 //pagebeforecreate
 $("#page-submit-feedback").live("pagebeforecreate", function(e, d) {
-  alert("ar")
-  // @todo This is being binded for each time this page loads.  That means feedback will be submitted (1 x the 
-    // the amount of time this page has been viewed.)
     $("#form-comment-and-rate").bind("submit", function(){
       var currentTime = new Date()
       var feedback = {
