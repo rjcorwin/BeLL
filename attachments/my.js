@@ -6,10 +6,6 @@
 
   $("#page-which-grade").live("pageshow", function(e, d) {
 
-  $(".ui-btn, .ui-link-inherit, .ui-btn-text").click(function() {
-    $.mobile.showPageLoadingMsg();
-  })
-
     var db = getDB();
     var grades
     $.getJSON('/' + db + '/_design/library/_view/grades?group=true', function(data) {
@@ -143,14 +139,28 @@
                             '</div>' +
                             '<div class="ui-block-b">'
           ;
-          $.each(resource_data._attachments, function (key, value) {
-            item +=             '<a rel="external" data-role="button" data-theme="b" href="/' + db + '/' + encodeURIComponent(resource_data._id) + '/' + encodeURIComponent(key) + '" ' +
-                                'data-icon="arrow-d" data-iconpos="right">' +
-                                    'download ' + key +
+
+          //
+          // Add our links to the resource
+          //
+          if (resource_data.resource_url) {
+            item +=             '<a data-role="button" data-theme="b" href="/' + db + '/' + resource_data.resource_url + '" ' +
+                                  'data-icon="arrow-d" data-iconpos="right">' +
+                                      'Go to resource' +
                                 '</a>' 
             ;
-          })
-                                
+          }          
+          else if (resource_data._attachments) {
+            $.each(resource_data._attachments, function (key, value) {
+              item +=             '<a rel="external" data-role="button" data-theme="b" href="/' + db + '/' + encodeURIComponent(resource_data._id) + '/' + encodeURIComponent(key) + '" ' +
+                                  'data-icon="arrow-d" data-iconpos="right">' +
+                                      'download ' + key +
+                                  '</a>' 
+              ;
+            })
+          }
+
+
           item +=               '<div style=" text-align:center">' +
                                     '<img style="width: 167px; height: 183px" src="' + book_image + '">' +
                                 '</div>' +
@@ -599,17 +609,3 @@ function closestEnabledButton( element ) {
 
 	
 })(jQuery);
-
-function deleteAllFeedback() {
-  $.couch.db("library").view("library/feedback_all", {
-    success: function(result) {
-      $.each(result.rows, function(key, value) {
-        $.couch.db("library").openDoc(value.key, {
-          success: function(doc) {
-            $.couch.db("library").removeDoc(doc)
-          }
-        })
-      })
-    }
-  })
-}
