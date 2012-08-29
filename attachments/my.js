@@ -146,7 +146,7 @@
           if (resource_data.resource_url) {
             item +=             '<a data-role="button" data-theme="b" href="/' + db + '/' + resource_data.resource_url + '" ' +
                                   'data-icon="arrow-d" data-iconpos="right">' +
-                                      'Go to resource' +
+                                      'begin' +
                                 '</a>' 
             ;
           }          
