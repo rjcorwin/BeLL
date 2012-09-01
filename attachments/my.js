@@ -202,10 +202,18 @@
     var db = getDB();
     var grade = $.url().fparam('grade')
     var subject = $.url().fparam('subject')
+    var level = $.url().fparam('level')
 
     $("#page-which-resource a.back-button").attr("href", "#page-which-subject&grade=" + grade + "&subject=" + subject)
 
-    $.getJSON('/' + db + '/_design/library/_view/grade_subject_resources?key=[' + grade + ',"' + subject + '"]', function(data) {
+    if (level) {
+      var url = '/' + db + '/_design/library/_view/subject_level_resources?key=["' + subject + '",' + level + ']'
+    }
+    else if (grade) {
+      //var url = '/' + db + '/_design/library/_view/grade_subject_resources?key=[' + grade + ',"' + subject + '"]'
+    }
+    
+    $.getJSON(url, function(data) {
       var response = data
       var subjects = []
 
