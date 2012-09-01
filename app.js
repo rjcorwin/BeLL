@@ -53,6 +53,18 @@ ddoc.views = {
     } 
   },
 
+
+  subject_levels: {
+    map: function(doc) {
+      if (doc.subject && doc.level && doc.type == 'resource') {
+        emit([doc.subject, doc.level], doc._id)
+      }
+    },
+    reduce: function(tag, counts) {
+      return tag.length
+    } 
+  },
+
   /*
    * Get all resources for given grade and subject.
    * @todo Figure out how to modify the reduce in grade_subjects view so I we can roll this 
@@ -66,6 +78,14 @@ ddoc.views = {
     map: function(doc) {
       if (doc.grade && doc.subject && doc.type == 'resource') {
         emit([doc.grade, doc.subject], doc.title)
+      }
+    }
+  },
+
+  subject_level_resources: {
+    map: function(doc) {
+      if (doc.subject && doc.level && doc.type == 'resource') {
+        emit([doc.subject, doc.level], doc.title)
       }
     }
   },

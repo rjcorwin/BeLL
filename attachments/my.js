@@ -47,6 +47,56 @@
   })
 
 
+  /* 
+   * Page: page-which-level
+   */
+
+  $("#page-which-level").live("pagebeforeshow", function(e, d) {
+
+    // clear the content region
+    $("#page-which-level .ui-content").html("<div class='loading'>Loading...<img src='images/ajax-loader.png'></div> ")
+
+    var db = getDB();
+    var subject = $.url().fparam('subject')
+
+    $.getJSON('/' + db + '/_design/library/_view/subject_levels?group=true&startkey=["' + subject + '",1]&endkey=["' + subject + '",99]', function(data) {
+      var response = data
+      var levels = []
+      $.each(response.rows, function(id, data) {
+        levels.push(data.key[1]) 
+      })
+
+      // Render the subject list
+      var html = 
+        '<div data-role="content" style="padding: 15px">' +
+          '<ul data-role="listview" data-divider-theme="b" data-inset="true">'
+      ;
+
+      $.each(levels, function (key, level) {
+        html += 
+              '<li data-theme="b">' +
+                  '<a href="#page-which-resource&subject=' + subject + '&level=' + level + '" >' +
+                      level +
+                  '</a>' + 
+              '</li>'
+        ;
+      })
+
+      html +=
+          '</ul>' +
+        '</div>'
+      ;
+
+      // Print the results to the screen
+      $("#page-which-level .ui-content").html(html)
+
+      // Render the results using jQM render 
+      $("#page-which-level").trigger("create");
+    });
+  })
+
+
+
   /*
    * Page: page-which-grade
    */
