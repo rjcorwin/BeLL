@@ -1,5 +1,52 @@
 (function($) {
 
+  /* 
+   * Page: page-student-dashboard
+   */
+
+  $("#page-student-dashboard").live("pagebeforeshow", function(e, d) {
+
+    // clear the content region
+    //$("#page-student-dashboard .my-subjects").html("<div class='loading'>Loading...<img src='images/ajax-loader.png'></div> ")
+
+    var db = getDB();
+
+    $.getJSON('/' + db + '/_design/library/_view/subjects_all', function(data) {
+      var response = data
+      var subjects = {}
+      $.each(response.rows, function(id, data) {
+        subjects[data.key] = data
+      })
+
+      // Render the subject list
+      var html = 
+      '<ul class="my-subjects" data-role="listview" data-divider-theme="b" data-inset="true">' +
+        '<li data-role="list-divider" role="heading">' +
+           'My Subjects' +  
+        '</li>' 
+      ;
+
+      $.each(subjects, function(key, value) {
+        html += 
+              '<li data-theme="c">' +
+                  '<a href="#page-which-level' + '&subject=' + key + '" >' +
+                      key +
+                  '</a>' + 
+              '</li>'
+        ;
+      })
+
+      html += '</ul>'
+
+      // Print the results to the screen
+      $("#page-student-dashboard .div-my-subjects").append(html)
+
+      // Render the results using jQM render 
+      $("#page-student-dashboard").trigger("create");
+    });
+  })
+
+
   /*
    * Page: page-which-grade
    */

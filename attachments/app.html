@@ -36,7 +36,73 @@
     
     <body>
 
+        <!-- Student Dashboard -->
+        <div data-role="page" id="page-student-dashboard" data-theme="b">
+            <div data-theme="b" data-role="header">
+                <div class="center-wrapper">
+                    <div class="center-button" data-role='button'>
+                        My Library
+                    </div>
+                </div>
+            </div>
+            <div data-role="content" style="padding: 15px">
+                <ul data-role="listview" data-divider-theme="b" data-inset="true">
+                    <li data-role="list-divider" role="heading">
+                        My Most Recent
+                    </li>
+                    <li data-theme="c">
+                        <a href="#page4" >
+                            3rd Grade - Language - Vocabulary
+                        </a>
+                    </li>
+                </ul>
+                <div class="div-my-subjects">
 
+                </div>
+                <ul data-role="listview" data-divider-theme="b" data-inset="true">
+                    <li data-role="list-divider" role="heading">
+                        My Badges
+                    </li>
+                    <li data-theme="c">
+                        <a href="#page7" data-transition="slide">
+                            Math 3 ***
+                        </a>
+                    </li>
+                </ul>
+                <ul data-role="listview" data-divider-theme="b" data-inset="true">
+                    <li data-role="list-divider" role="heading">
+                        More Libraries
+                    </li>
+                    <li data-theme="c">
+                        <a href="#page2" data-transition="slide">
+                            Search My School BeLL
+                        </a>
+                    </li>
+                    <li data-theme="c">
+                        <a href="#page2" data-transition="slide">
+                            Search The Ghana BeLL
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- select a level... -->
+        <div data-role="page" data-theme="b" id="page-which-level">
+            <div data-theme="b" data-role="header">
+                <a href="#page-which-grade" class="back-button" data-role='button'>
+                    <
+                </a>
+                <div class="center-wrapper">
+                    <div class="center-button" data-role='button'>
+                        select a level
+                    </div>
+                </div>
+            </div>
+            <div class="large-text-mode" data-role="content" style="padding: 15px">
+                <div class="loading">Loading...<img src="images/ajax-loader.png"></div> 
+            </div>
+        </div>
 
         <!-- select a grade... -->
         <div data-role="page" data-theme="b" id="page-which-grade">
@@ -58,7 +124,7 @@
         <div data-role="page" data-theme="b" id="page-which-subject">
             <div data-theme="b" data-role="header">
                 <a href="#page-which-grade" class="back-button" data-role='button'>
-                    <-
+                    <
                 </a>
                 <div class="center-wrapper">
                     <div class="center-button" data-role='button'>
@@ -76,7 +142,7 @@
         <div data-role="page" data-theme="b" id="page-which-resource">
             <div data-theme="b" data-role="header">
                 <a href="#page-which-grade" class="back-button" data-role='button'>
-                    <-
+                    <
                 </a>
                 <div class="center-wrapper">
                     <div class="center-button" data-role='button'>
@@ -135,7 +201,7 @@
         <div data-role="page" data-theme="b" id="page-feedback">
             <div data-theme="b" data-role="header">
                 <a href="#page-which-grade" class="back-button" data-role='button'>
-                    <-
+                    <
                 </a>
                 <div class="center-wrapper">
                     <div class="center-button" data-role='button'>
@@ -161,7 +227,7 @@
         <div data-role="page" data-theme="e" id="page-submit-feedback">
             <div data-theme="b" data-role="header">
                 <a class="back-button" data-role='button'>
-                    <-
+                    <
                 </a>
                 <div class="center-wrapper">
                     <div class="center-button" data-role='button'>
