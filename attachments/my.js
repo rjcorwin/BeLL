@@ -56,6 +56,8 @@
     // clear the content region
     $("#page-which-level .ui-content").html("<div class='loading'>Loading...<img src='images/ajax-loader.png'></div> ")
 
+    $("#page-which-level a.back-button").attr("href", "#page-student-dashboard")
+
     var db = getDB();
     var subject = $.url().fparam('subject')
 
@@ -204,13 +206,14 @@
     var subject = $.url().fparam('subject')
     var level = $.url().fparam('level')
 
-    $("#page-which-resource a.back-button").attr("href", "#page-which-subject&grade=" + grade + "&subject=" + subject)
 
     if (level) {
+      $("#page-which-resource a.back-button").attr("href", "#page-which-level&subject=" + subject)
       var url = '/' + db + '/_design/library/_view/subject_level_resources?key=["' + subject + '",' + level + ']'
     }
     else if (grade) {
-      //var url = '/' + db + '/_design/library/_view/grade_subject_resources?key=[' + grade + ',"' + subject + '"]'
+      $("#page-which-resource a.back-button").attr("href", "#page-which-subject&grade=" + grade + "&subject=" + subject)
+      var url = '/' + db + '/_design/library/_view/grade_subject_resources?key=[' + grade + ',"' + subject + '"]'
     }
     
     $.getJSON(url, function(data) {
