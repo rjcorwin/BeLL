@@ -7,7 +7,7 @@
   $("#page-student-dashboard").live("pagebeforeshow", function(e, d) {
 
     // clear the content region
-    //$("#page-student-dashboard .my-subjects").html("<div class='loading'>Loading...<img src='images/ajax-loader.png'></div> ")
+    $("#page-student-dashboard .div-my-subjects").html("<div class='loading'>Loading...<img src='images/ajax-loader.png'></div> ")
 
     var db = getDB();
 
@@ -39,7 +39,7 @@
       html += '</ul>'
 
       // Print the results to the screen
-      $("#page-student-dashboard .div-my-subjects").append(html)
+      $("#page-student-dashboard .div-my-subjects").html(html)
 
       // Render the results using jQM render 
       $("#page-student-dashboard").trigger("create");
