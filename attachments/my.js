@@ -229,9 +229,13 @@
 
       $.each(resources, function (index, resource) {
         $.getJSON('/' + db + '/' + resource.id_safe, function(resource_data) {
- 
-          // Default book image
-          var book_image = '/' + db + "/_design/library/images/book.png"
+          if(resource_data._attachments.hasOwnProperty("picture.png")) {
+            var book_image = '/' + db + "/" + resource_data._id + "/picture.png"
+          }
+          else {
+            // Default book image
+            var book_image = '/' + db + "/_design/library/images/book.png"
+          }
 
           var item = '<div data-role="collapsible" data-collapsed="true">' +
                         '<h3>' + 
