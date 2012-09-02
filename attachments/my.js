@@ -311,7 +311,7 @@
     
     // Back button
     $.getJSON('/' + db + '/' + resourceId_safe, function(resource_data) {
-      $("#page-feedback a.back-button").attr("href", "#page-which-resource&grade=" + resource_data.grade + "&subject=" + resource_data.subject)
+      $("#page-feedback a.back-button").attr("href", "#page-which-resource&level=" + resource_data.level + "&subject=" + resource_data.subject)
     })
 
     // This page is a rare case where users pull a u-turn after submitting feedback.  
