@@ -2,7 +2,7 @@
 
 ## ... [in development] a classroom management tool for teachers to offer students differentiated learning.
 
-<img src="https://raw.github.com/rjsteinert/ole-library/master/docs/images/my-library.png" align="right">The OLE Library App allows teachers to assign Resources to their students and track their progress.  Resources are classified by subject and level, and include a link to interactive HTML5 apps such as the OLE Book Reader app and the Flink Activities App.  The OLE Library App and related HTML5 Apps live on a CouchDB on a School BeLL or other PC broadcasting Wi-Fi to nearby devices with web browsers. 
+<img src="https://raw.github.com/rjsteinert/ole-library/master/docs/images/my-library.png" align="right">The OLE Library App allows teachers to assign Resources to their students and track their progress.  Resources are classified by subject and level, and include a link to interactive HTML5 apps such as the OLE Book Reader app and the Flink Activities App.  The OLE Library App and related HTML5 Apps live on a CouchDB on a School BeLL or other PC broadcasting Wi-Fi to nearby devices with web browsers. Future versions of this app will move even closer to Ground Computing when users can replicate their assigned resources to their Mobile Browser for use when not connected to a School's WiFi network. 
 
 
 
