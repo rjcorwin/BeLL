@@ -21,3 +21,8 @@ The OLE Library App allows for content from multiple publishers and also content
 ## ... a feedback tool to aid in planning curriculum.
 
 <img src="https://raw.github.com/rjsteinert/ole-library/master/docs/images/feedback.png" align="right">Replication of usage data and feedback on educational resources in the OLE Library App gives policy makers, school administrators, coaches, teachers, and students near real-time data to support decision making, transparency, incentives, and accountability.
+
+
+# Roadmap
+
+<img src="https://docs.google.com/drawings/pub?id=19Qhn3KGrmGWapF5hqnbufLUl2S87gnajVNhldIhT3ag&amp;w=1682&amp;h=1025">
