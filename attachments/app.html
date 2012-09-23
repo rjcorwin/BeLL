@@ -37,6 +37,38 @@
     <body>
 
         <!-- Student Dashboard -->
+        <div data-role="page" id="page-login" data-theme="b">
+            <div data-theme="b" data-role="header">
+                <div class="center-wrapper">
+                    <div class="center-button" data-role='button'>
+                        Login
+                    </div>
+                </div>
+            </div>
+            <form id="login" method="post" action="">
+              <h2>Login</h2>
+              <fieldset>
+                <p class="help">
+                  Login to CouchDB with your name and password.
+                </p>
+                <table summary=""><tbody><tr>
+                  <th><label>Username:</label></th>
+                  <td><input type="text" size="24" name="name"></td>
+                </tr><tr>
+                  <th><label>Password:</label></th>
+                  <td><input type="password" size="24" name="password"></td>
+                </tr>
+                </tbody></table>
+              </fieldset>
+              <div class="buttons">
+                <button type="submit">Login</button>
+                <button class="cancel" type="button">Cancel</button>
+              </div>
+            </form>
+        </div> 
+
+
+        <!-- Student Dashboard -->
         <div data-role="page" id="page-student-dashboard" data-theme="b">
             <div data-theme="b" data-role="header">
                 <div class="center-wrapper">

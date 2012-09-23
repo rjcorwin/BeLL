@@ -1,6 +1,32 @@
 (function($) {
 
   /* 
+   * Page: page-login
+   */
+
+  $("#page-login").live("pagebeforeshow", function(e, d) {
+    $("#login").bind("submit", function(){
+      var currentTime = new Date()
+      var form = {
+        username: $("input:eq(0)").val(),
+        password: $("input:eq(1)").val(),
+      } 
+      $.couch.login({
+        name: form.username ,
+        password: form.password,
+        success: function(data) {
+            console.log(data);
+        },
+        error: function(status) {
+            console.log(status);
+        }
+      });
+      return false
+
+    })
+  })
+
+  /* 
    * Page: page-student-dashboard
    */
 
