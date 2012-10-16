@@ -15,10 +15,11 @@
         name: form.username ,
         password: form.password,
         success: function(data) {
-            console.log(data);
+            alert("You have logged in successfully")
+            $.mobile.changePage("#page-student-dashboard");
         },
         error: function(status) {
-            console.log(status);
+            alert("Woops! Your username and password combination was not found. Try again.")
         }
       });
       return false

@@ -36,37 +36,6 @@
     
     <body>
 
-        <!-- Student Dashboard -->
-        <div data-role="page" id="page-login" data-theme="b">
-            <div data-theme="b" data-role="header">
-                <div class="center-wrapper">
-                    <div class="center-button" data-role='button'>
-                        Login
-                    </div>
-                </div>
-            </div>
-            <form id="login" method="post" action="">
-              <h2>Login</h2>
-              <fieldset>
-                <p class="help">
-                  Login to CouchDB with your name and password.
-                </p>
-                <table summary=""><tbody><tr>
-                  <th><label>Username:</label></th>
-                  <td><input type="text" size="24" name="name"></td>
-                </tr><tr>
-                  <th><label>Password:</label></th>
-                  <td><input type="password" size="24" name="password"></td>
-                </tr>
-                </tbody></table>
-              </fieldset>
-              <div class="buttons">
-                <button type="submit">Login</button>
-                <button class="cancel" type="button">Cancel</button>
-              </div>
-            </form>
-        </div> 
-
 
         <!-- Student Dashboard -->
         <div data-role="page" id="page-student-dashboard" data-theme="b">
@@ -78,44 +47,49 @@
                 </div>
             </div>
             <div data-role="content" style="padding: 15px">
-                <ul data-role="listview" data-divider-theme="b" data-inset="true">
-                    <li data-role="list-divider" role="heading">
-                        My Most Recent
-                    </li>
-                    <li data-theme="c">
-                        <a href="#page4">
-                            3rd Grade - Language - Vocabulary
-                        </a>
-                    </li>
-                </ul>
+ 
                 <div class="div-my-subjects">
-
+                    <!-- subjects here -->
                 </div>
-                <ul data-role="listview" data-divider-theme="b" data-inset="true">
-                    <li data-role="list-divider" role="heading">
-                        My Badges
-                    </li>
-                    <li data-theme="c">
-                            Math 3 ***
-                    </li>
-                </ul>
-                <ul data-role="listview" data-divider-theme="b" data-inset="true">
-                    <li data-role="list-divider" role="heading">
-                        More Libraries
-                    </li>
-                    <li data-theme="c">
-                        <a href="#page-which-grade" data-transition="slide">
-                            Search My School BeLL
-                        </a>
-                    </li>
-                    <li data-theme="c">
-                        <a href="#page-which-grade" data-transition="slide">
-                            Search The Ghana BeLL
-                        </a>
-                    </li>
-                </ul>
+                
             </div>
         </div>
+
+
+        <!-- Login -->
+        <div data-role="page" id="page-login" data-theme="b">
+            <div data-theme="b" data-role="header">
+                <div class="center-wrapper">
+                    <div class="center-button" data-role='button'>
+                        Login
+                    </div>
+                </div>
+            </div>
+            <div data-role='content'>
+                <div data-content-theme="c" data-role="collapsible" data-collapsed="false">
+                    <form id="login" method="post" action="">
+                      <fieldset>
+                        <p class="help">
+                          Login to with your name and password.
+                        </p>
+                        <table summary=""><tbody><tr>
+                          <th><label>Username:</label></th>
+                          <td><input type="text" size="24" name="name"></td>
+                        </tr><tr>
+                          <th><label>Password:</label></th>
+                          <td><input type="password" size="24" name="password"></td>
+                        </tr>
+                        </tbody></table>
+                      </fieldset>
+                      <div class="buttons">
+                        <button type="submit">Login</button>
+                        <button class="cancel" type="button">Cancel</button>
+                      </div>
+                    </form>
+                </div>
+            </div>
+        </div> 
+
 
         <!-- select a level... -->
         <div data-role="page" data-theme="b" id="page-which-level">
