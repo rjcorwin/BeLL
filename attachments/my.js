@@ -36,7 +36,7 @@
     // clear the content region
     $("#page-student-dashboard .div-my-subjects").html("<div class='loading'>Loading...<img src='images/ajax-loader.png'></div> ")
 
-    var db = getDB();
+    var db = getDB()
 
     $.getJSON('/' + db + '/_design/library/_view/subjects_all', function(data) {
       var response = data
@@ -69,40 +69,41 @@
       $("#page-student-dashboard .div-my-subjects").html(html)
 
       // Render the results using jQM render 
-      $("#page-student-dashboard").trigger("create");
+      $("#page-student-dashboard").trigger("create")
     });
   })
 
 
-  // Initialize the page
+
+  /* 
+   * Page: page-resource-form
+   */
+
   $("#page-resource-form").live("pagebeforeshow", function(e, d) {
+    
+    // Get the resource ID if available, otherwise we are creating a new Resource     
+    var docID = $.url().fparam('resource')
 
+    if(docID) {
 
-    // Get text for language
-    $('.deleteLabel span.ui-btn-text').text(libLang.deleteLabel);
-    $('.titleLabel').text(libLang.titleLabel);
-    $('.authorLabel').text(libLang.authorLabel);
-    $('.descriptionLabel').text(libLang.descriptionLabel);
-    $('.dateLabel').text(libLang.dateLabel);
-    $('.typeLabel').text(libLang.typeLabel);
-    $('.fileLabel').text(libLang.fileLabel);
-    $('.finalField .ui-btn-text').text(libLang.submitBtn);
-    $('.Submit').val(libLang.submitBtn);
-    $('.select-books').text(libLang.books);
-    $('.select-pictures').text(libLang.pictures);
-    $('.select-videos').text(libLang.videos);
-    $('.select-audio').text(libLang.audio);
-    $('.select-documents').text(libLang.documents);
-    $('.select-notes').text(libLang.notes);
-    $('.select-courses').text(libLang.courses);
+    } 
+    else { 
+      // Set the title of the page
+      $('.page-title').text("Add a new resource")
+      
+    }  
+
+    // When user clicks on the form submit button, information is saved to the database
+    $('input.Submit').click(function(event){
+      
+        event.preventDefault();
+      var itemID
+      var itemType
+      $('.settingsForm').saveResourceForm(itemID, itemType)
     
-    // Get the document id and type (i.e. book, video, etc.) from the URL
-    var itemID = $('#settings').getParameter('id'),
-      itemType = $('#settings').getParameter('type');
-    
-    // Set the title of the page
-    $('h1').text(libLang.add +' '+ libLang[itemType]);
-    
+    });
+
+    /*
     // Set the item's type/category
     $('.settingsForm .typeField .ui-btn-text').text(libLang[itemType]);
     $('.settingsForm select#type').val(itemType);
@@ -123,19 +124,11 @@
     };
     
     
-    /*// Show progress of uploads
+    // Show progress of uploads
     $('input[type="file"]').change(function(){
       $(this).after('<progress max="100" value="50">50</progress>');
-    });*/
-    
-    // When user clicks on the form submit button, information is saved to the database
-    $('input.Submit').click(function(event){
-      
-        event.preventDefault();
-      
-      $('.settingsForm').sendForm(itemID, itemType);
-    
     });
+    
     
     // Allow users to delete single file attachments to the item
     $('a.deleteThisFile').live('click', function(event){
@@ -155,6 +148,7 @@
         });
       });
     });
+    */
   });
 
   /* 
@@ -168,7 +162,7 @@
 
     $("#page-which-level a.back-button").attr("href", "#page-student-dashboard")
 
-    var db = getDB();
+    var db = getDB()
     var subject = $.url().fparam('subject')
 
     $.getJSON('/' + db + '/_design/library/_view/subject_levels?group=true&startkey=["' + subject + '",1]&endkey=["' + subject + '",99]', function(data) {
@@ -215,7 +209,7 @@
 
   $("#page-which-grade").live("pageshow", function(e, d) {
 
-    var db = getDB();
+    var db = getDB()
     var grades
     $.getJSON('/' + db + '/_design/library/_view/grades?group=true', function(data) {
       
@@ -260,7 +254,7 @@
     // clear the content region
     $("#page-which-subject .ui-content").html("<div class='loading'>Loading...<img src='images/ajax-loader.png'></div> ")
 
-    var db = getDB();
+    var db = getDB()
     var grade = $.url().fparam('grade')
 
     $.getJSON('/' + db + '/_design/library/_view/grade_subjects?group=true&startkey=[' + grade + ',"a"]&endkey=[' + grade + ',"z"]', function(data) {
@@ -311,7 +305,7 @@
     // clear the content region
     $("#page-which-resource .ui-content").html("<div class='loading'>Loading...<img src='images/ajax-loader.png'></div> ")
 
-    var db = getDB();
+    var db = getDB()
     var grade = $.url().fparam('grade')
     var subject = $.url().fparam('subject')
     var level = $.url().fparam('level')

@@ -95,7 +95,7 @@
         <div data-role="page" id="page-resource-form" data-theme="b">
             <div data-theme="b" data-role="header">
                 <div class="center-wrapper">
-                    <div class="center-button" data-role='button'>
+                    <div class="center-button page-title" data-role='button'>
                         Resource Form
                     </div>
                 </div>
@@ -123,17 +123,29 @@
                             <label for="date" class="dateLabel">Date</label>
                             <input type="text" name="date" id="date" value="" />
                         </div>
-                        <div data-role="fieldcontain" class="typeField">
-                            <label for="type" class="typeLabel">Type</label>
-                            <select name="type" id="type"> 
-                                <option value="books" class="select-books">Books</option>
-                                <option value="pictures" class="select-pictures">Pictures</option>
-                                <option value="videos" class="select-videos">Videos</option>
-                                <option value="audio" class="select-audio">Audio</option>
-                                <option value="documents" class="select-documents">Documents</option>
-                                <option value="notes" class="select-notes">Notes</option>
-                                <option value="courses" class="select-courses">Courses</option> 
+                        <div data-role="fieldcontain" class="subjectField">
+                            <label for="subject" class="subjectLabel">Subject</label>
+                            <select name="subject" id="subject"> 
+                                <option value="english" class="select-english">english</option>
+                                <option value="math" class="select-math">math</option> 
+                                <option value="new-subject" class="select-new-subject new-option">new subject...</option> 
                            </select>
+                        </div>
+                        <div data-role="fieldcontain">
+                            <label for="newSubject" class="newSubjectLabel">New Subject</label>
+                            <input type="text" name="newSubject" id="newSubject" value=""  />
+                        </div>
+                        <div data-role="fieldcontain" class="levelField">
+                            <label for="level" class="levelLabel">Level</label>
+                            <select name="level" id="level"> 
+                                <option value="1" class="select-1">1</option>
+                                <option value="2" class="select-2">2</option> 
+                                <option value="new-level" class="select-new-level new-option">new level...</option> 
+                           </select>
+                        </div>
+                        <div data-role="fieldcontain">
+                            <label for="newLevel" class="newLevelLabel">New Level</label>
+                            <input type="text" name="newLevel" id="newLevel" value=""  />
                         </div>
                         <div data-role="fieldcontain">
                             <label for="upload" id="uploadLabel" class="fileLabel" style="width: 20%; display: inline-block; margin: 0 2% 0 0;">File</label>
