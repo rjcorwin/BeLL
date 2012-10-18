@@ -91,6 +91,70 @@
         </div> 
 
 
+        <!-- Resource Form -->
+        <div data-role="page" id="page-resource-form" data-theme="b">
+            <div data-theme="b" data-role="header">
+                <div class="center-wrapper">
+                    <div class="center-button" data-role='button'>
+                        Resource Form
+                    </div>
+                </div>
+            </div>
+            <div data-role='content'>
+                <div data-content-theme="c" data-role="collapsible" data-collapsed="false">
+                    <form class="settingsForm" method="post" action="" enctype="multipart/form-data">
+                        <div data-role="fieldcontain" class="deleteButton">
+                            <label for="delete" class="deleteLabel">Delete</label>
+                            <input type="checkbox" name="delete" id="delete" value="Yes" />
+                        </div>
+                        <div data-role="fieldcontain">
+                            <label for="title" class="titleLabel">Title</label>
+                            <input type="text" name="title" id="title" value="" />
+                        </div>
+                        <div data-role="fieldcontain">
+                            <label for="author" class="authorLabel">Author</label>
+                            <input type="text" name="author" id="author" value=""  />
+                        </div>
+                        <div data-role="fieldcontain">
+                            <label for="description" class="descriptionLabel">Description</label>
+                            <textarea name="description" id="description"></textarea>
+                        </div>
+                        <div data-role="fieldcontain">
+                            <label for="date" class="dateLabel">Date</label>
+                            <input type="text" name="date" id="date" value="" />
+                        </div>
+                        <div data-role="fieldcontain" class="typeField">
+                            <label for="type" class="typeLabel">Type</label>
+                            <select name="type" id="type"> 
+                                <option value="books" class="select-books">Books</option>
+                                <option value="pictures" class="select-pictures">Pictures</option>
+                                <option value="videos" class="select-videos">Videos</option>
+                                <option value="audio" class="select-audio">Audio</option>
+                                <option value="documents" class="select-documents">Documents</option>
+                                <option value="notes" class="select-notes">Notes</option>
+                                <option value="courses" class="select-courses">Courses</option> 
+                           </select>
+                        </div>
+                        <div data-role="fieldcontain">
+                            <label for="upload" id="uploadLabel" class="fileLabel" style="width: 20%; display: inline-block; margin: 0 2% 0 0;">File</label>
+                            <!--<button id="upload" name="upload" data-inline="true">Upload New File</button>-->
+                            <input type="file" name="_attachments" id="_attachments" multiple="multiple" />
+                        </div>
+                        
+                        <div data-role="fieldcontain" class="finalField">
+                            <input type="hidden" name="filename" id="filename" value="" />
+                            <input type="hidden" name="_id" id="_id" value="" />
+                            <input type="hidden" name="_rev" id="_rev" value="" />
+                            <input type="submit" data-theme="b" class="Submit" value="Submit" />
+                        </div>
+                        <!-- <p id="serverResponse"></p> -->
+                    </form>
+
+                </div>
+            </div>
+        </div> 
+
+
         <!-- select a level... -->
         <div data-role="page" data-theme="b" id="page-which-level">
             <div data-theme="b" data-role="header">
