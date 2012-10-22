@@ -89,7 +89,8 @@
     } 
     else { 
       // Set the title of the page
-      $('.page-title').text("Add a new resource")
+      //$('.page-title').text("Add a new resource")
+      $('.page-title').trigger("create");
       
     }  
 
