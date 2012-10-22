@@ -18,6 +18,13 @@ jQuery.fn.saveResourceForm = function(itemID, itemType) {
     itemFilename = $('.settingsForm input:file').val(), 
     itemResourceURL = $('.settingsForm input#resourceURL').val();
   
+  if(itemNewLevel) {
+    itemLevel = itemNewLevel
+  }
+  if(itemNewSubject) {
+    itemSubject = itemNewSubject 
+  }
+  
   // Check for new uploaded file
   if (itemFilename == undefined || itemFilename == ""){
     $('.settingsForm input:file').remove();
