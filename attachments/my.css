@@ -19,8 +19,12 @@ margin: 0 auto;
 margin: 0 auto !important;
 }
 
+.right-button{
+  float: right;
+}
+
 .ui-header {
-  background: url(images/star-tall.png) !important;
+  background: url(images/star-taller.png) !important;
   padding: 6px;
 }
 .ui-header .ui-btn-inner .ui-btn-text {

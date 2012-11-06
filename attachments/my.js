@@ -5,6 +5,7 @@
    */
 
   $("#page-login").live("pagebeforeshow", function(e, d) {
+    // @todo If logged in, forward to #page-student-dashboard
     $("#login").bind("submit", function(){
       var currentTime = new Date()
       var form = {
