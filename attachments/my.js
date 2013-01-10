@@ -5,7 +5,6 @@
    */
 
   $("#page-login").live("pagebeforeshow", function(e, d) {
-    // @todo If logged in, forward to #page-student-dashboard
     $("#login").bind("submit", function(){
       var currentTime = new Date()
       var form = {
@@ -479,12 +478,12 @@ $("#page-submit-feedback").live("pagebeforecreate", function(e, d) {
       var currentTime = new Date()
       var feedback = {
         type: "feedback",
-        resource: $("input:eq(0)").val(),
-        user: $("input:eq(1)").val(),
-        group: $("input:eq(2)").val(),
-        rating: $("form input[type=radio]:checked").val(),
-        comment: $("textarea:eq(0)").val(),
-        anonymous: $("select:eq(0)").val(),
+        resource: $("#textinput4").val(),
+        user: $("#textinput5").val(),
+        group: $("#textinput6").val(),
+        rating: $("form#form-comment-and-rate input[type=radio]:checked").val(),
+        comment: $("#form-comment-and-rate textarea:eq(0)").val(),
+        anonymous: $("#form-comment-and-rate select:eq(0)").val(),
         timestamp: currentTime.getTime(),
         _id: "type-feedback--time-" + currentTime.getTime() + "--uuid-" + $.couch.newUUID()
       } 
